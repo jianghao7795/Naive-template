@@ -1,0 +1,46 @@
+{
+	"name": "blog-web",
+	"version": "0.0.0",
+	"scripts": {
+		"dev": "vite",
+		"build": "vue-tsc --noEmit && vite build",
+		"serve": "vite preview"
+	},
+	"dependencies": {
+		"mockjs": "^1.1.0",
+		"vant": "^3.2.4",
+		"vue": "^3.2.6",
+		"vue-router": "^4.0.11",
+		"vuex": "^4.0.2"
+	},
+	"devDependencies": {
+		"@types/node": "^16.9.2",
+		"@vitejs/plugin-vue": "^1.6.1",
+		"@vue/compiler-sfc": "^3.2.6",
+		"amfe-flexible": "^2.2.1",
+		"less": "^4.1.1",
+		"less-loader": "^10.0.1",
+		"postcss": "^8.3.8",
+		"postcss-pxtorem": "^6.0.0",
+		"prettier": "2.4.1",
+		"typescript": "^4.3.2",
+		"vite": "^2.5.4",
+		"vite-plugin-mock": "^2.9.6",
+		"vite-plugin-style-import": "^1.2.1",
+		"vue-tsc": "^0.2.2"
+	},
+	"compilerOptions": {
+		"target": "ES6",
+		"module": "commonjs",
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": "./",
+		"paths": {
+			"@/*": [
+				"src/*"
+			]
+		}
+	},
+	"exclude": [
+		"node_modules"
+	]
+}
