@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import Vant from '@/vants';
+import Vant from './vants';
 import App from './App.vue';
 
 const baseApp = createApp(App);

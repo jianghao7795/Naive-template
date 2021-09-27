@@ -12,7 +12,8 @@ const aa = ref('fasdfasdf');
 </script>
 
 <template>
-	<img alt="Vue logo" src="@/assets/logo.png" />
+	<div>1111</div>
+	<img alt="Vue logo" src="@/assets/logo.png" /> -->
 	<HelloWorld :msg="aa"></HelloWorld>
 	<RefReactive></RefReactive>
 	<div class="app-style">
@@ -21,22 +22,7 @@ const aa = ref('fasdfasdf');
 	</div>
 </template>
 
-<style lang="less">
-.app-style {
-	:global {
-		color: #fff;
-	}
-}
-
-// .my-button {
-//   width: 200px;
-// }
-
-/** 覆盖 Button 内部子元素的样式 */
-// .my-button .van-button__text {
-//   color: red;
-// }
-
+<style>
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;

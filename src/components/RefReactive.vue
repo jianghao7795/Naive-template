@@ -28,4 +28,4 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="less"></style>
+<style scoped></style>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, reactive, computed } from 'vue';
+import { reactive, computed } from 'vue';
 defineProps({
 	msg: {
 		type: String,
@@ -12,6 +12,12 @@ type DState = {
 	double: number;
 };
 
+type DStateCount = {
+	num1: number;
+	num2: number;
+	result: number;
+};
+
 // const count = ref(0)
 const state: DState = reactive({
 	count: 0,
@@ -22,9 +28,11 @@ const add = () => {
 	state.count++;
 	// console.log(state.count)
 };
-const result = ref(0);
-const num1 = ref(0);
-const num2 = ref(0);
+const stateCount: DStateCount = reactive({
+	num1: 0,
+	num2: 0,
+	result: computed(() => stateCount.num1 + stateCount.num2),
+});
 </script>
 
 <template>
@@ -36,7 +44,10 @@ const num2 = ref(0);
 		<van-cell title="单元格" value="内容"></van-cell>
 		<van-cell title="单元格" value="内容" label="描述信息"></van-cell>
 	</van-cell-group>
-	<div><input type="text" v-model="num1" /><span>+</span><input type="text" v-model="num2" /><span>=</span>{{ result }}</div>
+	<div>
+		<input type="number" v-model="stateCount.num1" /><span>+</span><input type="number" v-model="stateCount.num2" /><span>=</span
+		>{{ stateCount.result }}
+	</div>
 </template>
 
 <style scoped>
