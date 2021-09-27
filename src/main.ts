@@ -1,6 +1,7 @@
 import { createApp } from "vue"
-import vant from "./vant/index"
-import App from "./App.vue"
+import vant from "@/vant"
+import App from "@/App.vue"
+// mport 'vant'
 
 const baseApp = createApp(App)
 
