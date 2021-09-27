@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import HelloWorld from "@/components/HelloWorld.vue"
-import RefReactive from "@/components/RefReactive.vue"
-import { ref } from "vue"
+import HelloWorld from '@/components/HelloWorld.vue';
+import RefReactive from '@/components/RefReactive.vue';
+import { ref } from 'vue';
 const getUser = async () => {
-	const response = await fetch("/api/users")
-	const res = response.json()
-	console.log(res.then((item) => console.log(item)))
-}
-getUser()
-const aa = ref("fasdfasdf")
+	const response = await fetch('/api/users');
+	const res = response.json();
+	console.log(res.then((item) => console.log(item)));
+};
+getUser();
+const aa = ref('fasdfasdf');
 </script>
 
 <template>

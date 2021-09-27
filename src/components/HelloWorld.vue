@@ -1,27 +1,27 @@
 <script lang="ts" setup>
-import { ref, reactive, computed } from "vue"
+import { ref, reactive, computed } from "vue";
 defineProps({
 	msg: {
 		type: String,
 		required: true,
 	},
-})
+});
 
 type DState = {
-	count: number
-	double: number
-}
+	count: number;
+	double: number;
+};
 
 // const count = ref(0)
 const state: DState = reactive({
 	count: 0,
 	double: computed(() => state.count * 2),
-})
+});
 
 const add = () => {
-	state.count++
+	state.count++;
 	// console.log(state.count)
-}
+};
 </script>
 
 <template>
