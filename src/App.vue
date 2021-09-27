@@ -14,7 +14,7 @@ const aa = ref('fasdfasdf');
 <template>
 	<div>1111</div>
 	<img alt="Vue logo" src="@/assets/logo.png" /> -->
-	<HelloWorld :msg="aa"></HelloWorld>
+	<HelloWorld a="1" style="color: red" :msg="aa"></HelloWorld>
 	<RefReactive></RefReactive>
 	<div class="app-style">
 		<p>123123123</p>

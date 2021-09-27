@@ -1,11 +1,10 @@
 <script lang="ts" setup>
-import { reactive, computed } from 'vue';
-defineProps({
-	msg: {
-		type: String,
-		required: true,
-	},
-});
+import { reactive, computed, defineProps, useAttrs } from 'vue';
+defineProps<{ msg: string }>();
+const attrs = useAttrs();
+console.log(attrs);
+console.log(attrs.a);
+console.log(attrs.style);
 
 type DState = {
 	count: number;
