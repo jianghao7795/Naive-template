@@ -12,7 +12,7 @@ const aa = ref('fasdfasdf');
 </script>
 
 <template>
-	<img alt="Vue logo" src="./assets/logo.png" />
+	<img alt="Vue logo" src="@/assets/logo.png" />
 	<HelloWorld :msg="aa"></HelloWorld>
 	<RefReactive></RefReactive>
 	<div class="app-style">

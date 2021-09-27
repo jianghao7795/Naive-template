@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed } from 'vue';
 defineProps({
 	msg: {
 		type: String,
@@ -22,6 +22,9 @@ const add = () => {
 	state.count++;
 	// console.log(state.count)
 };
+const result = ref(0);
+const num1 = ref(0);
+const num2 = ref(0);
 </script>
 
 <template>
@@ -33,6 +36,7 @@ const add = () => {
 		<van-cell title="单元格" value="内容"></van-cell>
 		<van-cell title="单元格" value="内容" label="描述信息"></van-cell>
 	</van-cell-group>
+	<div><input type="text" v-model="num1" /><span>+</span><input type="text" v-model="num2" /><span>=</span>{{ result }}</div>
 </template>
 
 <style scoped>

@@ -1,11 +1,9 @@
 import { createApp } from 'vue';
-import vant from './vants/index';
+import Vant from '@/vants';
 import App from './App.vue';
 
 const baseApp = createApp(App);
-
-vant.forEach((item) => {
+Vant.forEach((item) => {
 	baseApp.use(item);
 });
-
 baseApp.mount('#app');
