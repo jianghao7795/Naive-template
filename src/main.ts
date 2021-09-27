@@ -1,12 +1,10 @@
-import { createApp } from "vue"
-import vant from "@/vant"
-import App from "@/App.vue"
-// mport 'vant'
 
-const baseApp = createApp(App)
+import { createApp } from 'vue';
+import Vant from './vants';
+import App from './App.vue';
 
-vant.forEach((item) => {
-	baseApp.use(item)
-})
-
-baseApp.mount("#app")
+const baseApp = createApp(App);
+Vant.forEach((item) => {
+	baseApp.use(item);
+});
+baseApp.mount('#app');

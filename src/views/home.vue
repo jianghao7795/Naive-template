@@ -1,11 +1,12 @@
 <template>
-	<div>{{ aa }}
+	<div>
+		{{ aa }}
 		<div></div>
 	</div>
 </template>
 
 <script setup lang="ts">
-const aa = ""
+const aa = '';
 </script>
 
 <style scoped></style>
