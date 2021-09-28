@@ -1,3 +1,4 @@
+
 import { createApp } from 'vue';
 import Vant from './vants';
 import App from './App.vue';
