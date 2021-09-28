@@ -12,14 +12,17 @@ const aa = ref('fasdfasdf');
 </script>
 
 <template>
-	<div>1111</div>
-	<img alt="Vue logo" src="@/assets/logo.png" /> -->
-	<HelloWorld a="1" style="color: red" :msg="aa"></HelloWorld>
-	<RefReactive></RefReactive>
-	<div class="app-style">
-		<p>123123123</p>
-		<van-button type="primary">案件</van-button>
-	</div>
+	<h1>App</h1>
+	<p>
+		<!--使用 router-link 组件进行导航 -->
+		<!--通过传递 `to` 来指定链接 -->
+		<!--`<router-link>` 将呈现一个带有正确 `href` 属性的 `<a>` 标签-->
+		<router-link to="/">Go to Home</router-link>
+		<router-link to="/about">Go to About</router-link>
+	</p>
+	<!-- 路由出口 -->
+	<!-- 路由匹配到的组件将渲染在这里 -->
+	<router-view></router-view>
 </template>
 
 <style>

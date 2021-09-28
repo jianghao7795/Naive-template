@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-const aa = '';
+const aa = 'bb';
 </script>
 
 <style scoped></style>
