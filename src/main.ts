@@ -1,13 +1,12 @@
 
 import { createApp } from 'vue';
 // import Vant from './vants';
-import Vant from 'vant'
+import Vant from '@/vants'
 import App from './App.vue';
-import 'vant/lib/index.css'
+import router from './rotuer';
 
 const baseApp = createApp(App);
-baseApp.use(Vant)
-// Vant.forEach((item) => {
-// 	baseApp.use(item);
-// });
-baseApp.mount('#app');
+Vant.forEach((item) => {
+	baseApp.use(item);
+});
+baseApp.use(router).mount('#app');
