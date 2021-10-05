@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue';
-import RefReactive from '@/components/RefReactive.vue';
+import HelloWorld from './components/HelloWorld.vue';
+import RefReactive from './components/RefReactive.vue';
 import { ref } from 'vue';
 const getUser = async () => {
 	const response = await fetch('/api/users');

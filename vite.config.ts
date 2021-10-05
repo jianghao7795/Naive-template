@@ -10,27 +10,15 @@ const config = defineConfig({
 	plugins: [
 		vue(),
 		viteMockServe({}),
-		styleImport({
-			libs: [
-				{
-					libraryName: 'vant',
-					esModule: true,
-					resolveStyle: (name: string) => `vant/es/${name}/style`,
-				},
-			],
-		}),
 	],
 	// hmr: { overlay: false },
-	// baseUrl: "./",
+	//  baseUrl: "./",
 	server: {
 		host: '0.0.0.0',
 	},
 	resolve: {
 		alias: {
 			'@': resolve(__dirname, 'src/'),
-			'~': resolve(__dirname, 'src/components'),
-			'#': resolve(__dirname, 'src/views'),
-			'*': resolve(__dirname, 'src/assets'),
 		},
 	},
 });

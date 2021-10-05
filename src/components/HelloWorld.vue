@@ -44,9 +44,9 @@ const stateCount: DStateCount = reactive({
 		<van-cell title="单元格" value="内容" label="描述信息"></van-cell>
 	</van-cell-group>
 	<div>
-		<input type="number" v-model="stateCount.num1" /><span>+</span><input type="number" v-model="stateCount.num2" /><span>=</span
-		>{{ stateCount.result }}
+		<input type="number" v-model="stateCount.num1" /><span>+</span><input type="number" v-model="stateCount.num2" /><span>=</span>{{ stateCount.result }}
 	</div>
+	<div><van-button>wode </van-button></div>
 </template>
 
 <style scoped>
