@@ -1,3 +1,3 @@
-import { Button, Cell, CellGroup } from 'vant';
+// import { Button, Cell, CellGroup } from 'vant';
 
-export default [Button, Cell, CellGroup];
+// export default [Button, Cell, CellGroup];
