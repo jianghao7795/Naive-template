@@ -46,7 +46,8 @@ const service = axios.create({
   // 联调
   baseURL: '/apis',
   headers: {
-    'Content-Type': 'application/json;charset=utf-8'
+    'Content-Type': 'application/json;charset=utf-8',
+    "authorization": `Bearer ${localStorage.getItem('token')}`
   },
   // 是否跨站点访问控制请求
   withCredentials: true,
