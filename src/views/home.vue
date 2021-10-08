@@ -1,25 +1,28 @@
 <template>
-	<div>
-		{{ aa }}
+  <div>
+    {{ aa }}
+    <h1>todoList</h1>
+    <ul>
+      <li v-for="item in state.lists" :key="item">{{ item }}</li>
+    </ul>
 
-		<h1>todoList</h1>
-		<ul>
-			<li v-for="() in lists"></li>
-		</ul>
-
-		<div><van-button type="primary">点击</van-button></div>
-	</div>
+    <div><van-button type="primary" v-on:click="add">点击</van-button></div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from '@vue/reactivity';
+import { ref, reactive } from 'vue';
 
 // const aa = 'bb';
 const state = reactive({
-	lists: [1, 2, 3],
+  lists: [1, 2, 3],
 });
-import { ref } from 'vue';
+
 const aa = ref(0);
+function add() {
+  aa.value++;
+  // console.log(aa.value);
+}
 </script>
 
 <style scoped></style>
