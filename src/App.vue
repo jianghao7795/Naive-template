@@ -6,7 +6,7 @@ const aa = ref('fasdfasdf');
 const getUser = async () => {
   const response = await fetch('/api/users');
   const res = response.json();
-  console.log(res.then((item) => console.log(item)));
+  res.then((item) => console.log(item));
 };
 getUser();
 </script>
@@ -14,6 +14,8 @@ getUser();
 <template>
   <h1>App todoList</h1>
   <h2>{{ aa }}</h2>
+  <h3><router-link to="/about">About</router-link></h3>
+  <h3><router-link to="/">Home</router-link></h3>
   <!-- <transition mode="out-in">
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive"></router-view>
@@ -25,7 +27,7 @@ getUser();
   <router-view v-slot="{ Component }">
     <transition name="router-fade" mode="out-in">
       <keep-alive>
-        <component :is="Component" v-if="route.meta.keepAlive"></component>
+        <component :is="Component"></component>
       </keep-alive>
     </transition>
   </router-view>

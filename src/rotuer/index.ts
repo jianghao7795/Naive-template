@@ -8,7 +8,7 @@ const routers = [
     name: 'Home',
     component: Home,
     meta: {
-      keepAlive: true, // 不需要缓存
+      keepAlive: false, // 不需要缓存
     },
   },
   {
@@ -16,7 +16,7 @@ const routers = [
     name: 'About',
     component: About,
     meta: {
-      keepAlive: true, // 不需要缓存
+      keepAlive: false, // 不需要缓存
     },
   },
 ];
@@ -24,6 +24,11 @@ const routers = [
 const router = createRouter({
   history: createWebHistory(),
   routes: routers,
+});
+
+router.beforeEach((to, from, next) => {
+  // console.log(to, from, next); 跳转处理
+  next();
 });
 
 export default router;
