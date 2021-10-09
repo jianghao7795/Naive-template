@@ -1,15 +1,24 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import request from '@/utils/axios';
+import { AxiosResponse } from 'axios';
+type ResponseData<T> = {
+  code: number;
+  data: T;
+  msg: null | string;
+};
+
+type Item = {
+  id: number;
+  name: string;
+};
 // import { useRoute } from 'vue-router';
 // const route = useRoute();
 const aa = ref('fasdfasdf');
 const getUser = async () => {
-  const response = await fetch('/api/users');
-  const res = response.json();
-  res.then((item) => {
-    console.log(item);
-    aa.value = item.data.name;
-  });
+  const response = await request.get<any, AxiosResponse<ResponseData<Item>>>('/api/users');
+  console.log(response);
+  aa.value = response.data.data.name;
 };
 getUser();
 </script>

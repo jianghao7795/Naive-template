@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import { viteMockServe } from 'vite-plugin-mock';
 import styleImport from 'vite-plugin-style-import';
 import viteCompression from 'vite-plugin-compression';
-import path from 'path';
+// import path from 'path';
 
 // https://vitejs.dev/config/
 
