@@ -36,8 +36,8 @@
           </Cell>
         </CellGroup>
         <div style="margin-top: 15px; display: flex; justify-content: space-around; align-items: center">
-          <Button type="primary" size="small" v-on:click="deleteTodo">恢复</Button>
-          <Button type="primary" size="small" v-on:click="deleteTodo">永久删除</Button>
+          <!-- <Button type="primary" size="small" v-on:click="deleteTodo">恢复</Button> -->
+          <Button type="primary" block size="small" v-on:click="deleteTodo">永久删除</Button>
         </div>
       </Tab>
     </Tabs>
