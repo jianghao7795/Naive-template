@@ -22,9 +22,9 @@ const baseApp = createApp(App);
 //   },
 // };
 baseApp.config.warnHandler = (msg, vm, trace) => {
-  console.log(msg, vm, trace);
+  // console.log(msg, vm, trace);
 };
 baseApp.config.errorHandler = (err, vm, info) => {
-  console.log(err, vm, info);
+  // console.log(err, vm, info);
 };
 baseApp.use(router).mount('#app');

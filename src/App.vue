@@ -17,7 +17,7 @@ type Item = {
 const aa = ref('fasdfasdf');
 const getUser = async () => {
   const response = await request.get<any, AxiosResponse<ResponseData<Item>>>('/api/users');
-  console.log(response);
+  //   console.log(response);
   aa.value = response.data.data.name;
 };
 getUser();
@@ -25,15 +25,18 @@ getUser();
 
 <template>
   <h1>App todoList</h1>
-  <h2>{{ aa }}</h2>
-  <h3><router-link to="/about">About</router-link></h3>
-  <h3><router-link to="/">Home</router-link></h3>
+  <div>
+    <router-link to="/about">About</router-link>
+    |
+    <router-link to="/">Home</router-link>
+  </div>
 
-  <router-view v-slot="{ Component }">
-    <transition name="router-fade" mode="out-in">
-      <keep-alive>
-        <component :is="Component"></component>
+  <router-view v-slot="{ Component, route }">
+    <transition :name="route.meta.transition">
+      <keep-alive v-if="route.meta.keepAlive">
+        <component :is="Component" />
       </keep-alive>
+      <component :is="Component" v-else />
     </transition>
   </router-view>
 </template>
