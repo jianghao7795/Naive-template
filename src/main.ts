@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './rotuer';
+import 'vfonts/FiraCode.css';
 
 const baseApp = createApp(App);
 // console.log(baseApp.config);

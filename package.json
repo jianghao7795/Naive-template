@@ -7,10 +7,13 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@vicons/fluent": "^0.11.0",
     "amfe-flexible": "^2.2.1",
     "axios": "^0.22.0",
     "mockjs": "^1.1.0",
+    "naive-ui": "^2.19.9",
     "vant": "^3.2.4",
+    "vfonts": "^0.1.0",
     "vue": "^3.2.6",
     "vue-axios": "^3.3.7",
     "vue-hooks": "^0.3.2",

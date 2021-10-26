@@ -37,15 +37,15 @@ const config = defineConfig({
   plugins: [
     vue(),
     viteMockServe({}),
-    styleImport({
-      libs: [
-        {
-          libraryName: 'vant',
-          esModule: true,
-          resolveStyle: (name: string) => `vant/es/${name}/style`,
-        },
-      ],
-    }),
+    // styleImport({
+    //   libs: [
+    //     {
+    //       libraryName: 'vant',
+    //       esModule: true,
+    //       resolveStyle: (name: string) => `vant/es/${name}/style`,
+    //     },
+    //   ],
+    // }),
     viteCompression({
       verbose: true,
       disable: false,

@@ -1,12 +1,12 @@
 <template>
   <div>{{ aa }}</div>
-  <Button @click="changeNumberAa" type="primary">Count++</Button>
+  <NButton @click="changeNumberAa" type="primary">Count++</NButton>
   <div id="demo">
     Push this button to do something you shouldn't be doing:
     <br />
 
     <div :class="{ shake: noActivated }">
-      <Button type="danger" @click="noActivated = !noActivated">Click me</Button>
+      <NButton type="primary" @click="noActivated = !noActivated">Click me</NButton>
       <span v-if="noActivated">Oh no!</span>
     </div>
     <div @mousemove="xCoordinate" :style="{ backgroundColor: `hsl(${x}, 80%, 50%)` }" class="movearea">
@@ -26,13 +26,13 @@
 </template>
 
 <script setup lang="ts">
-import { Button } from 'vant';
+import { NButton } from 'naive-ui';
 import { ref, onBeforeMount, watch } from 'vue';
 
 const aa = ref<number>(0);
-const changeNumberAa = (e: PointerEvent) => {
+const changeNumberAa = (e: MouseEvent) => {
   aa.value++;
-  // console.log(e);
+  console.log(e);
 };
 
 watch(aa, (newAa: number, oldAa: number) => {
