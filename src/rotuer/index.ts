@@ -1,29 +1,37 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '@/views/home.vue';
 import About from '@/views/about.vue';
+import BackendLayout from '@/layout/BackendLayout.vue';
 
-const routers = [
+const routers: RouteRecordRaw[] = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home,
+    path: '/backend',
+    name: 'Backend',
+    component: BackendLayout,
     meta: {
-      keepAlive: false, // 不需要缓存
+      transition: 'aside-right', // 不需要缓存
     },
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: About,
-    meta: {
-      keepAlive: false, // 不需要缓存
-    },
+    children: [
+      {
+        path: 'home',
+        name: 'Home',
+        component: Home,
+      },
+      {
+        path: 'about',
+        name: 'About',
+        component: About,
+      },
+    ],
+    // meta: { transition: 'aside-right' },
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes: routers,
+  strict: true,
+  scrollBehavior: () => ({ left: 0, top: 0 }),
 });
 
 router.beforeEach((to, from, next) => {

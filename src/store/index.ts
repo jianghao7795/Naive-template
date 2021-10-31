@@ -47,3 +47,5 @@ const actions = {
     }, 1000);
   },
 };
+
+// export defualt store
