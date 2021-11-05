@@ -231,8 +231,13 @@
 
 "@vicons/fluent@^0.11.0":
   version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@vicons/fluent/-/fluent-0.11.0.tgz#84f3cda255539cb96f45c89c1601e2892d79826f"
-  integrity sha512-5sbdKLijk5/PBtsapDjBodskSCrfOsqOlpCbXQ33pZmY0VZ62N46Yq6SFJXHyUgFhjvReRrFe4wCGVAktchHFg==
+  resolved "https://registry.nlark.com/@vicons/fluent/download/@vicons/fluent-0.11.0.tgz#84f3cda255539cb96f45c89c1601e2892d79826f"
+  integrity sha1-hPPNolVTnLlvRcicFgHiiS15gm8=
+
+"@vicons/ionicons5@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.nlark.com/@vicons/ionicons5/download/@vicons/ionicons5-0.11.0.tgz#54185bfa572a09df70094db1954f28bfbf1363ed"
+  integrity sha1-VBhb+lcqCd9wCU2xlU8ov78TY+0=
 
 "@vitejs/plugin-vue@^1.6.1":
   version "1.9.3"

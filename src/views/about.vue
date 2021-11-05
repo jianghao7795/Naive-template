@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { NButton } from 'naive-ui';
-import { ref, onBeforeMount, watch } from 'vue';
+import { onBeforeMount, ref, watch } from 'vue';
 
 const aa = ref<number>(0);
 const changeNumberAa = (e: MouseEvent) => {

@@ -36,7 +36,7 @@ const config = defineConfig({
   },
   plugins: [
     vue(),
-    viteMockServe({}),
+    // viteMockServe({}),
     // styleImport({
     //   libs: [
     //     {

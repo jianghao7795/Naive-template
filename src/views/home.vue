@@ -6,8 +6,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { NButton } from 'naive-ui';
+
+import {ref} from 'vue';
+
 const aa = ref<number>(0);
 const changeCount = (b: any) => {
   console.log(b);

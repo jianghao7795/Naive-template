@@ -1,5 +1,12 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import type Response from './Axios';
+import { useMessage } from 'naive-ui';
+
+type Response = {
+  data: { code: number; msg: string; data: any };
+  status: number;
+};
+
+const message = useMessage();
 
 const showStatus = (status: number) => {
   let message = '';
@@ -45,13 +52,18 @@ const showStatus = (status: number) => {
 
 const service = axios.create({
   // 联调
-  baseURL: '/',
+  url: '/',
+  baseURL: 'http://192.168.71.131:4100',
   headers: {
     'Content-Type': 'application/json;charset=utf-8',
-    authorization: `Bearer ${localStorage.getItem('token')}`,
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'content-type',
+    Authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : '',
+    mode: 'cors',
   },
+
   // 是否跨站点访问控制请求
-  withCredentials: true,
+  // withCredentials: true,
   timeout: 30000,
   transformRequest: [
     (data) => {
@@ -94,24 +106,21 @@ export type ResponseData = {
 
 // 响应拦截器
 service.interceptors.response.use(
-  (response: AxiosResponse<any>) => {
+  (response: AxiosResponse<Response>): AxiosResponse<Response> => {
+    // console.log(response);
     const status = response.status;
     let msg = '';
     if (status < 200 || status >= 300) {
       // 处理http错误，抛到业务代码
       msg = showStatus(status);
-      if (typeof response.data === 'string') {
-        response.data = { msg };
-      } else {
-        response.data.msg = msg;
-      }
     }
     return response;
   },
   (error) => {
     // 错误抛到业务代码
-    error.data = {};
-    error.data.msg = '请求超时或服务器异常，请检查网络或联系管理员！';
+    console.log(error);
+    // error.data = {};
+    // error.data.msg = '请求超时或服务器异常，请检查网络或联系管理员！';
     return Promise.resolve(error);
   },
 );

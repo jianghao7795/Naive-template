@@ -2,8 +2,19 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '@/views/home.vue';
 import About from '@/views/about.vue';
 import BackendLayout from '@/layout/BackendLayout.vue';
+import Login from '@/views/login/login.vue';
 
 const routers: RouteRecordRaw[] = [
+  {
+    path: '/',
+    name: 'yield',
+    redirect: '/login',
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+  },
   {
     path: '/backend',
     name: 'Backend',
