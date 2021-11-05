@@ -1,12 +1,12 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { useMessage } from 'naive-ui';
+import { useNotification } from 'naive-ui';
 
 type Response = {
   data: { code: number; msg: string; data: any };
   status: number;
 };
 
-const message = useMessage();
+const notification = useNotification();
 
 const showStatus = (status: number) => {
   let message = '';
@@ -107,20 +107,18 @@ export type ResponseData = {
 // 响应拦截器
 service.interceptors.response.use(
   (response: AxiosResponse<Response>): AxiosResponse<Response> => {
-    // console.log(response);
+    console.log(response);
     const status = response.status;
     let msg = '';
     if (status < 200 || status >= 300) {
       // 处理http错误，抛到业务代码
       msg = showStatus(status);
+
+      return response;
     }
     return response;
   },
   (error) => {
-    // 错误抛到业务代码
-    console.log(error);
-    // error.data = {};
-    // error.data.msg = '请求超时或服务器异常，请检查网络或联系管理员！';
     return Promise.resolve(error);
   },
 );

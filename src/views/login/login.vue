@@ -11,7 +11,7 @@
         label-placement="left"
         :label-width="160"
         :style="{
-          maxWidth: '640px',
+          maxWidth: '720px',
         }"
       >
         <n-form-item>
@@ -37,6 +37,7 @@
           <n-button @click="handleSubmit" class="other" size="large" type="primary">登录</n-button>
         </div> -->
       </n-form>
+      <n-button @click="notify('info')">信息</n-button>
     </div>
   </div>
 </template>
@@ -45,9 +46,9 @@
 import { defineComponent, reactive, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { PersonOutline, LockClosedOutline, LogoGithub, LogoFacebook } from '@vicons/ionicons5';
-import { NInput, NButton, NForm, NFormItem } from 'naive-ui';
+import { NInput, NButton, NForm, NFormItem, useNotification } from 'naive-ui';
 import axios from '@/utils/axios';
-import { Axios, AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 
 type ImageType = {
   code: number;
@@ -65,7 +66,7 @@ type LoginType = {
   };
   msg: string;
 };
-
+const notification = useNotification();
 export default defineComponent({
   name: 'Login',
   components: {
@@ -104,19 +105,33 @@ export default defineComponent({
       image,
       logo: '@/assets/head.png',
       getImage,
-      handleSubmit() {
+      handleSubmit: () => {
         // router.replace('/dashboard/control');
         axios.post<typeof formData, AxiosResponse<LoginType>>('/user/login', { ...formData }).then((resp) => {
           const {
             code,
             data: { token },
+            msg,
           } = resp.data;
           if (code === 200) {
             localStorage.setItem('token', token);
             router.push({
               path: '/backend/home',
             });
+            return;
           }
+
+          notification.error({
+            content: '登录失败',
+            meta: msg,
+          });
+        });
+      },
+      notify: (type: string) => {
+        console.log(type);
+        notification.error({
+          content: '说点啥呢',
+          meta: '想不出来',
         });
       },
       rules: {
