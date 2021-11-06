@@ -11,6 +11,11 @@ const routers: RouteRecordRaw[] = [
     redirect: '/login',
   },
   {
+    path: '/transition',
+    name: 'transition',
+    component: () => import('@/views/transition.vue'),
+  },
+  {
     path: '/login',
     name: 'login',
     component: Login,

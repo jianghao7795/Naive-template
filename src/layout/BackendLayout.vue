@@ -5,6 +5,8 @@
       |
       <router-link to="/backend/about">About</router-link>
     </div>
-    <router-view class="child-view"></router-view>
+    <transition appear name="slide-fade">
+      <keep-alive><router-view class="child-view"></router-view></keep-alive>
+    </transition>
   </div>
 </template>
