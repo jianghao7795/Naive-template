@@ -9,7 +9,7 @@
       <keep-alive><router-view class="child-view"></router-view></keep-alive>
     </transition> -->
     <router-view v-slot="{ Component }">
-      <transition :name="slide" mode="out-in">
+      <transition appear :name="slide" mode="out-in">
         <component class="child-view" :is="Component" />
       </transition>
     </router-view>
@@ -17,7 +17,6 @@
 </template>
 
 <script lang="ts">
-import setup from 'naive-ui/lib/radio/src/use-radio';
 import { ref, defineComponent } from 'vue';
 import { useRoute, onBeforeRouteUpdate } from 'vue-router';
 export default defineComponent({
@@ -41,13 +40,21 @@ export default defineComponent({
 </script>
 
 <style>
+.slide-right-enter-from {
+  opacity: 0;
+  transition: translate3d(-100%, 0, 0) 500ms ease-in-out;
+}
+.slide-right-enter-to {
+  opacity: 1;
+  transition: translate3d(-100%, 0, 0) 500ms ease-in-out;
+}
 .slide-right-enter-active,
 .slide-right-leave-active,
 .slide-left-enter-active,
 .slide-left-leave-active {
   width: 100vw;
   will-change: transform;
-  transition: all 500ms;
+  transition: translate3d(100%, 0, 0) 500ms ease-in-out;
 }
 
 .slide-right-enter {
