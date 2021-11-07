@@ -51,7 +51,7 @@ export default defineComponent({
 }
 
 .slide-right-enter {
-  opacity: 0;
+  opacity: 1 0.5s;
   transform: translate3d(100%, 0, 0);
 }
 
@@ -61,7 +61,7 @@ export default defineComponent({
 }
 
 .slide-left-enter {
-  opacity: 0;
+  opacity: 1 0.5s;
   transform: translate3d(-100%, 0, 0);
 }
 
