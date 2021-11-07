@@ -13,12 +13,18 @@ const routers: RouteRecordRaw[] = [
   {
     path: '/transition',
     name: 'transition',
+    meta: {
+      index: 1,
+    },
     component: () => import('@/views/transition.vue'),
   },
   {
     path: '/login',
     name: 'login',
     component: Login,
+    meta: {
+      index: 2,
+    },
   },
   {
     path: '/backend',
@@ -26,17 +32,24 @@ const routers: RouteRecordRaw[] = [
     component: BackendLayout,
     meta: {
       transition: 'aside-right', // 不需要缓存
+      index: 20,
     },
     children: [
       {
         path: 'home',
         name: 'Home',
         component: Home,
+        meta: {
+          index: 21,
+        },
       },
       {
         path: 'about',
         name: 'About',
         component: About,
+        meta: {
+          index: 22,
+        },
       },
     ],
     // meta: { transition: 'aside-right' },
