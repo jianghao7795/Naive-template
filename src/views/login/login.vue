@@ -80,7 +80,7 @@ export default defineComponent({
     NFormItem,
   },
   setup() {
-    // const router = useRouter();
+    const router = useRouter();
     const formData = reactive({
       username: '',
       password: '',
@@ -115,9 +115,9 @@ export default defineComponent({
           } = resp.data;
           if (code === 200) {
             localStorage.setItem('token', token);
-            // router.push({
-            //   path: '/backend/home',
-            // });
+            router.push({
+              path: '/backend/home',
+            });
             return;
           }
 

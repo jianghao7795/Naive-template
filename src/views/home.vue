@@ -1,7 +1,7 @@
 <template>
   <div>
     {{ aa }}
-    <NButton type="primary" @click="changeCount">count ++</NButton>
+    <n-button type="primary" @click="changeCount">count ++</n-button>
     <br />
     <span v-once v-bind:id="dynamicId">Message: {{ msg }}</span>
     <!-- v-once是渲染一次 v-bind-->
@@ -12,23 +12,41 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import { NButton } from 'naive-ui';
-import { ref } from 'vue';
+import { ref, defineComponent } from 'vue';
 import HomeComponent from '@/views/homeDemo/HomeComponent.vue';
 // const is = ref<string>();
 // console.log(is);
-const aa = ref<number>(0);
-const msg = ref<string>('');
-const dynamicId = ref<string>('dynamicId');
-const changeCount = (b: any) => {
-  console.log(b);
-  aa.value++;
-};
+export default defineComponent({
+  name: 'Home',
+  components: {
+    NButton,
+    HomeComponent
+  },
+  setup() {
+    const aa = ref<number>(0);
+    const msg = ref<string>('');
+    const dynamicId = ref<string>('dynamicId');
+    const changeCount = (b: any) => {
+      console.log(b);
+      aa.value++;
+    };
 
-const changeMsg = () => {
-  msg.value = 'wowowowo';
-};
+    const changeMsg = () => {
+      msg.value = 'wowowowo';
+    };
+
+    return {
+      aa,
+      msg,
+      dynamicId,
+      changeCount,
+      changeMsg
+    }
+  }
+});
+
 // type DState = {
 //   lists: Item[];
 //   finishLists: Item[];
