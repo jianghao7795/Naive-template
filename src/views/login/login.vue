@@ -57,7 +57,7 @@ type LoginType = {
   };
   msg: string;
 };
-const notification = useNotification();
+
 export default defineComponent({
   name: 'Login',
   components: {
@@ -71,6 +71,7 @@ export default defineComponent({
     NFormItem,
   },
   setup() {
+    const notification = useNotification();
     const router = useRouter();
     const formData = reactive({
       username: '',

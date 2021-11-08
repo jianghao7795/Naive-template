@@ -6,7 +6,7 @@ type Response = {
   status: number;
 };
 
-const notification = useNotification();
+// const notification = useNotification();
 
 const showStatus = (status: number) => {
   let message = '';
