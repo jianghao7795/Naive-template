@@ -14,13 +14,13 @@
 <!--      </transition>-->
 <!--    </router-view>-->
     <RouterView>
-      <template #default="{ Component, route }">
+      <template v-slot="{ Component, route }">
         <transition
-            name="fade"
+            name="fade-slide"
             mode="out-in"
             appear
         >
-          <keep-alive >
+          <keep-alive>
             <component :is="Component" :key="route.fullPath" />
           </keep-alive>
 <!--          <component v-else :is="Component" :key="route.fullPath" />-->
@@ -46,6 +46,7 @@ export default defineComponent({
     //   slide.value = toIndex.index < fromIndex.index ? 'slide-right' : 'slide-left';
     // });
     return {
+      slide
     };
   },
 });
