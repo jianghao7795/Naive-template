@@ -27,15 +27,6 @@
         <n-form-item>
           <n-button @click="handleSubmit" class="other" size="large" type="primary">登录</n-button>
         </n-form-item>
-        <!-- <div class="view-account-cont">
-          <n-input v-model:value="formData.username" type="text" placeholder="please input" />
-        </div>
-        <div class="view-account-cont">
-          <n-input type="password" v-model:value="formData.password" show-password-toggle placeholder="密码" :maxlength="8" />
-        </div>
-        <div class="view-account-cont">
-          <n-button @click="handleSubmit" class="other" size="large" type="primary">登录</n-button>
-        </div> -->
       </n-form>
       <n-button @click="notify('info')">信息</n-button>
     </div>

@@ -3,12 +3,16 @@
     {{ aa }}
     <n-button type="primary" @click="changeCount">count ++</n-button>
     <br />
+    <p>显示: {{ user }}</p>
+    <p>show: {{ slide }}</p>
     <span v-once v-bind:id="dynamicId">Message: {{ msg }}</span>
     <!-- v-once是渲染一次 v-bind-->
     <n-button @click="changeMsg">change msg</n-button>
     <br />
     <p>{{ msg }}</p>
-    <HomeComponent v-once :is="msg"></HomeComponent>
+    <HomeComponent :is="msg"></HomeComponent>
+
+    <demo :app="msg"></demo>
   </div>
 </template>
 
@@ -16,14 +20,16 @@
 import { NButton } from 'naive-ui';
 import { ref, defineComponent } from 'vue';
 import HomeComponent from '@/views/homeDemo/HomeComponent.vue';
-// const is = ref<string>();
-// console.log(is);
+import Transition from '@/views/transition.vue';
+
 export default defineComponent({
   name: 'Home',
   components: {
     NButton,
-    HomeComponent
+    HomeComponent,
+    demo: Transition,
   },
+  inject: ['user', 'slide'], // 父级的provide 子级的 inject 接收
   setup() {
     const aa = ref<number>(0);
     const msg = ref<string>('');
@@ -42,9 +48,9 @@ export default defineComponent({
       msg,
       dynamicId,
       changeCount,
-      changeMsg
-    }
-  }
+      changeMsg,
+    };
+  },
 });
 
 // type DState = {

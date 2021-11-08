@@ -11,12 +11,12 @@ const routers: RouteRecordRaw[] = [
     redirect: '/login',
   },
   {
-    path: '/transition',
-    name: 'transition',
+    path: '/todo',
+    name: 'todo',
     meta: {
       index: 1,
     },
-    component: () => import('@/views/transition.vue'),
+    component: () => import('@/views/todo/index.vue'),
   },
   {
     path: '/login',

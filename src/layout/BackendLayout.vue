@@ -8,22 +8,18 @@
     <!-- <transition appear name="slide-fade" mode="out-in">
       <keep-alive><router-view class="child-view"></router-view></keep-alive>
     </transition> -->
-<!--    <router-view v-slot="{ Component }">-->
-<!--      <transition appear name="slide-fade" mode="out-in">-->
-<!--        <component class="child-view" :is="Component" />-->
-<!--      </transition>-->
-<!--    </router-view>-->
+    <!--    <router-view v-slot="{ Component }">-->
+    <!--      <transition appear name="slide-fade" mode="out-in">-->
+    <!--        <component class="child-view" :is="Component" />-->
+    <!--      </transition>-->
+    <!--    </router-view>-->
     <RouterView>
       <template v-slot="{ Component, route }">
-        <transition
-            name="fade-slide"
-            mode="out-in"
-            appear
-        >
+        <transition name="fade-slide" mode="out-in" appear>
           <keep-alive>
             <component :is="Component" :key="route.fullPath" />
           </keep-alive>
-<!--          <component v-else :is="Component" :key="route.fullPath" />-->
+          <!--          <component v-else :is="Component" :key="route.fullPath" />-->
         </transition>
       </template>
     </RouterView>
@@ -35,6 +31,12 @@ import { ref, defineComponent } from 'vue';
 // import { useRoute, onBeforeRouteUpdate } from 'vue-router';
 export default defineComponent({
   name: 'BackendLayout',
+  provide() {
+    return {
+      user: 'John Doc',
+      slide: this.slide,
+    };
+  },
   setup() {
     // const route = useRoute();
     const slide = ref<string>('slide-left');
@@ -46,13 +48,10 @@ export default defineComponent({
     //   slide.value = toIndex.index < fromIndex.index ? 'slide-right' : 'slide-left';
     // });
     return {
-      slide
+      slide,
     };
   },
 });
 </script>
 
-<style lang="less">
-
-
-</style>
+<style lang="less"></style>

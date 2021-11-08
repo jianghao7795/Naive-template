@@ -1,25 +1,32 @@
 <template>
   <div id="demo">
-    <button @click="show = !show">Toggle</button>
-    <transition name="fade">
-      <p v-if="show">bbs toToDo</p>
-    </transition>
+    <p>{{ show ? '1' : '2' }}</p>
+    <n-button type="primary" @click="show = !show">Toggle</n-button>
+    <p>1: {{ app }}</p>
+    <n-button type="warning">点击</n-button>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue';
+<script lang="ts">
+type PropsType = {
+  app: string;
+};
+import { ref, defineComponent } from 'vue';
+import { NButton } from 'naive-ui';
 
-const show = ref<boolean>(false);
+export default defineComponent<PropsType>({
+  name: 'transition',
+  components: {
+    NButton,
+  },
+  setup(props) {
+    const show = ref<boolean>(false);
+    const { app } = props;
+    return {
+      show,
+      app,
+    };
+  },
+});
 </script>
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
+<style lang="less"></style>

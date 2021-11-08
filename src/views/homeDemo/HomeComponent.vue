@@ -3,11 +3,21 @@
   <p>123123123</p>
 </template>
 
-<script lang="ts" setup>
-import { defineProps } from 'vue';
+<script lang="ts">
+type PropsType = {
+  is: string;
+};
+import { defineComponent } from 'vue';
 
-// 相当于setup(props) 的props
-defineProps({
-  is: String,
+export default defineComponent<PropsType>({
+  name: 'HomeComponent',
+
+  setup(props) {
+    const { is } = props;
+
+    return {
+      is,
+    };
+  },
 });
 </script>
