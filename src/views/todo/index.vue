@@ -31,8 +31,51 @@
             </n-input-group>
           </p>
         </n-tab-pane>
-        <n-tab-pane name="the beatles" tab="已完成">Hey Jude</n-tab-pane>
-        <n-tab-pane name="jay chou" tab="已删除">七里香</n-tab-pane>
+        <n-tab-pane name="the beatles" tab="已完成">
+          <n-list bordered>
+            <template #header>事件</template>
+            <template #footer v-if="state.finished.length === 0">无TODO事件</template>
+            <n-list-item v-for="(item, key) in state.finished" :key="item.content + key">
+              <n-thing>
+                <template #header>{{ item.content }}</template>
+                <template #header-extra>
+                  <n-tooltip trigger="hover" placement="left-start">
+                    <template #trigger>
+                      <n-button circle size="small" @click="() => finishItem(key, 'finished')">
+                        <template #icon>
+                          <ExitOutline />
+                        </template>
+                      </n-button>
+                    </template>
+                    删除Item
+                  </n-tooltip>
+                </template>
+              </n-thing>
+            </n-list-item>
+          </n-list>
+        </n-tab-pane>
+        <n-tab-pane name="jay chou" tab="已删除">
+          <n-list bordered>
+            <template #header>事件</template>
+            <n-list-item v-for="(item, key) in state.deleteItem" :key="item.content + key">
+              <n-thing>
+                <template #header>{{ item.content }}</template>
+                <template #header-extra>
+                  <n-tooltip trigger="hover" placement="left-start">
+                    <template #trigger>
+                      <n-button circle size="small" @click="() => finishItem(key, 'deleteItem')">
+                        <template #icon>
+                          <ExitOutline />
+                        </template>
+                      </n-button>
+                    </template>
+                    恢复Item
+                  </n-tooltip>
+                </template>
+              </n-thing>
+            </n-list-item>
+          </n-list>
+        </n-tab-pane>
       </n-tabs>
     </n-card>
   </div>
@@ -85,8 +128,17 @@ export default defineComponent<PropsType>({
 
     const finishItem = (index: number, itemKey: 'unfinished' | 'finished' | 'deleteItem') => {
       const items = state[itemKey].filter((_, key) => key !== index);
-
+      const itemFinished = state[itemKey].filter((_, key) => key === index);
       state[itemKey] = items;
+      if (itemKey === 'unfinished') {
+        state.finished.push(itemFinished[0]);
+      }
+      if (itemKey === 'finished') {
+        state.deleteItem.push(itemFinished[0]);
+      }
+      if (itemKey === 'deleteItem') {
+        state.unfinished.push(itemFinished[0]);
+      }
     };
 
     const addItem = () => {
