@@ -4,9 +4,10 @@ import { useNotification } from 'naive-ui';
 type Response = {
   data: { code: number; msg: string; data: any };
   status: number;
+  msg: string;
 };
 
-const showStatus = (status: number) => {
+const showStatus = (status: number, errorMessage: string) => {
   let message = '';
   switch (status) {
     case 400:
@@ -45,7 +46,7 @@ const showStatus = (status: number) => {
     default:
       message = `连接出错(${status})!`;
   }
-  return `${message}，请检查网络或联系管理员！`;
+  return `${message}! ${errorMessage}`;
 };
 
 const service = axios.create({
@@ -96,24 +97,20 @@ service.interceptors.request.use(
   },
 );
 
-export type ResponseData = {
-  code: number;
-  data: any;
-  msg: null | string;
-};
-
 // 响应拦截器
 service.interceptors.response.use(
   (response: AxiosResponse<Response>): AxiosResponse<Response> => {
     console.log(response);
     const status = response.status;
-    let msg = '';
+    const errorMessage = response.data.msg;
     if (status !== 200) {
       // 处理http错误，抛到业务代码
-      msg = showStatus(status);
+
+      const msg = showStatus(status, errorMessage);
       window.$notification.error({
         title: '请求错误： ' + status,
         description: msg,
+        duration: 10000,
       });
 
       return response;
