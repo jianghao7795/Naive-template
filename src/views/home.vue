@@ -18,9 +18,17 @@
 
 <script lang="ts">
 import { NButton } from 'naive-ui';
-import { ref, defineComponent } from 'vue';
+import { ref, defineComponent, onMounted } from 'vue';
 import HomeComponent from '@/views/homeDemo/HomeComponent.vue';
 import Transition from '@/views/transition.vue';
+import axios from '@/utils/axios';
+import { AxiosResponse } from 'axios';
+
+type Menu = {};
+
+type MenusType = {
+  data: Menu[];
+};
 
 export default defineComponent({
   name: 'Home',
@@ -34,6 +42,13 @@ export default defineComponent({
     const aa = ref<number>(0);
     const msg = ref<string>('');
     const dynamicId = ref<string>('dynamicId');
+    onMounted(() => {
+      axios.get<string, AxiosResponse<MenusType>>('/api/v1/menus-all').then((response) => {
+        console.log(response);
+        const { data } = response.data;
+        console.log(data);
+      });
+    });
     const changeCount = (b: any) => {
       console.log(b);
       aa.value++;

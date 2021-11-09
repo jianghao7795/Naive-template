@@ -107,7 +107,7 @@ export type ResponseData = {
 // 响应拦截器
 service.interceptors.response.use(
   (response: AxiosResponse<Response>): AxiosResponse<Response> => {
-    console.log(response);
+    // console.log(response);
     const status = response.status;
     let msg = '';
     if (status < 200 || status >= 300) {

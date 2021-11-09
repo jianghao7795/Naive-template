@@ -1,16 +1,19 @@
 <template>
   <n-message-provider>
-    <router-view />
+    <n-notification-provider>
+      <router-view />
+    </n-notification-provider>
   </n-message-provider>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { NMessageProvider } from 'naive-ui';
+import { NMessageProvider, NNotificationProvider } from 'naive-ui';
 export default defineComponent({
   name: 'App',
   components: {
     NMessageProvider,
+    NNotificationProvider,
   },
   setup() {
     return {};

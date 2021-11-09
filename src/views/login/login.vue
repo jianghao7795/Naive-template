@@ -100,6 +100,7 @@ export default defineComponent({
       handleSubmit: () => {
         // router.replace('/dashboard/control');
         axios.post<typeof formData, AxiosResponse<LoginType>>('/user/login', { ...formData }).then((resp) => {
+          // console.log(resp);
           const {
             code,
             data: { token },
