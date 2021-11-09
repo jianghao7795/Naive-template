@@ -28,6 +28,7 @@
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
+import { useMessage, useNotification } from 'naive-ui';
 
 export default defineComponent({
   name: 'BackendLayout',
@@ -39,6 +40,8 @@ export default defineComponent({
   },
   setup() {
     const slide = ref<string>('slide-left');
+    window.$message = useMessage();
+    window.$notification = useNotification();
     return {
       slide,
     };

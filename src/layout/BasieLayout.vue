@@ -15,7 +15,7 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { NLayout, NLayoutFooter, NLayoutHeader, NLayoutContent, NLayoutSider, NSpace } from 'naive-ui';
+import { NLayout, NLayoutFooter, NLayoutHeader, NLayoutContent, NLayoutSider, NSpace, useMessage, useNotification } from 'naive-ui';
 
 export default defineComponent({
   name: 'BasieLayout',
@@ -28,6 +28,8 @@ export default defineComponent({
     NSpace,
   },
   setup() {
+    window.$message = useMessage();
+    window.$notification = useNotification();
     return {};
   },
 });

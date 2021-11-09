@@ -56,8 +56,8 @@ const service = axios.create({
   baseURL: 'http://192.168.71.131:4100',
   headers: {
     'Content-Type': 'application/json;charset=utf-8',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'content-type',
+    // 'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Headers': 'content-type',
     Authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : '',
     mode: 'cors',
   },
@@ -105,11 +105,6 @@ service.interceptors.response.use(
 
     const status = response.status;
     const errorMessage = response.data.msg;
-    window.$notification.error({
-      title: '请求错误： ' + status,
-      description: '123123123',
-      duration: 10000,
-    });
     if (status !== 200) {
       // 处理http错误，抛到业务代码
 

@@ -12,7 +12,6 @@
         </n-icon>
       </template>
     </n-switch>
-    <p @click="changeTheme">{{ theme ? '1' : '2' }}</p>
     <n-message-provider>
       <n-notification-provider>
         <router-view />
@@ -23,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { NMessageProvider, NNotificationProvider, NConfigProvider, NSwitch, NIcon, useMessage, useNotification } from 'naive-ui';
+import { NMessageProvider, NNotificationProvider, NConfigProvider, NSwitch, NIcon } from 'naive-ui';
 import { darkTheme, zhCN, dateZhCN } from 'naive-ui';
 import { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface';
 import { Moon, SunnySharp } from '@vicons/ionicons5';
@@ -50,8 +49,7 @@ export default defineComponent({
 
   setup() {
     const theme = ref<BuiltInGlobalTheme | null>(null);
-    window.$message = useMessage();
-    window.$notification = useNotification();
+
     const changeTheme = (e: boolean) => {
       // console.log(e);
       if (e) {
