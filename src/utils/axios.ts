@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { useNotification } from 'naive-ui';
+// import { useRouter, useRoute } from 'vue-router';
+import router from '@/rotuer/index';
 
 type Response = {
   data: { code: number; msg: string; data: any };
@@ -101,8 +102,14 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response: AxiosResponse<Response>): AxiosResponse<Response> => {
     // console.log(response);
+
     const status = response.status;
     const errorMessage = response.data.msg;
+    window.$notification.error({
+      title: '请求错误： ' + status,
+      description: '123123123',
+      duration: 10000,
+    });
     if (status !== 200) {
       // 处理http错误，抛到业务代码
 
@@ -112,6 +119,17 @@ service.interceptors.response.use(
         description: msg,
         duration: 10000,
       });
+
+      if (status === 401) {
+        router
+          .push({
+            path: '/login',
+            query: {
+              redirect: router.currentRoute.value.fullPath,
+            },
+          })
+          .then((r) => r);
+      }
 
       return response;
     }

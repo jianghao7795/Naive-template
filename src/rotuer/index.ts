@@ -64,7 +64,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // console.log(to, from, next); 跳转处理
+  // console.log(to, from, next);
+  // 跳转处理;
   next();
 });
 
