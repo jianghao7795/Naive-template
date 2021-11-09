@@ -192,5 +192,5 @@ export default defineComponent<PropsType>({
 </script>
 
 <style lang="less" scoped>
-@import 'src/styles/tabs.less';
+@import './src/styles/tabs.less';
 </style>
