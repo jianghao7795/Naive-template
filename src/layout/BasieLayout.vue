@@ -6,7 +6,7 @@
         <n-layout>
           <n-layout-header>
             颐和园路
-            <n-switch :on-update:value="changeTheme" class="dark-theme-switch">
+            <n-switch :on-update:value="changeTheme" :default-value="!!theme" class="dark-theme-switch">
               <template #checked>
                 <n-icon size="14" color="#ffd93b">
                   <Moon />
