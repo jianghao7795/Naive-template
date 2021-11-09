@@ -100,7 +100,7 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   (response: AxiosResponse<Response>): AxiosResponse<Response> => {
-    console.log(response);
+    // console.log(response);
     const status = response.status;
     const errorMessage = response.data.msg;
     if (status !== 200) {

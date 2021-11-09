@@ -4,7 +4,7 @@
       <n-tabs :value="tabs" justify-content="space-evenly" type="line" :on-update:value="changeTab" :on-before-leave="beforeChangeTab">
         <n-tab-pane name="oasis" tab="未完成">
           <n-list bordered>
-            <template #header>事件</template>
+            <template #header>事件 点击 x: {{ x }}, y: {{ y }}</template>
             <template #footer v-if="state.unfinished.length === 0">无TODO事件</template>
             <n-list-item v-for="(item, key) in state.unfinished" :key="item.content + key">
               <n-thing>
@@ -96,7 +96,7 @@ type StateType = {
   deleteItem: Item[];
 };
 import { defineComponent, reactive, ref, Ref, onMounted } from 'vue';
-// import { useRoute } from 'vue-router';
+import userMousePosition from '@/hooks/userMousePosition';
 import { NCard, NTabs, NTabPane, NList, NListItem, NThing, NInput, NInputGroup, NButton, NTooltip, useMessage } from 'naive-ui';
 import { ExitOutline } from '@vicons/ionicons5';
 
@@ -126,6 +126,8 @@ export default defineComponent<PropsType>({
       finished: [] as Item[],
       deleteItem: [] as Item[],
     });
+
+    const { x, y } = userMousePosition();
 
     onMounted(() => {
       inputInstRef.value && inputInstRef.value.focus();
@@ -172,6 +174,8 @@ export default defineComponent<PropsType>({
     };
 
     return {
+      x,
+      y,
       tabs,
       state,
       item,
