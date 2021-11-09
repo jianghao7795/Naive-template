@@ -1,20 +1,8 @@
 <template>
   <n-config-provider :theme="theme" :locale="zhCN" :date-locale="dateZhCN">
-    <n-switch :on-update:value="changeTheme" class="dark-theme-switch">
-      <template #checked>
-        <n-icon size="14" color="#ffd93b">
-          <Moon />
-        </n-icon>
-      </template>
-      <template #unchecked>
-        <n-icon size="14" color="#ffd93b">
-          <SunnySharp />
-        </n-icon>
-      </template>
-    </n-switch>
     <n-message-provider>
       <n-notification-provider>
-        <router-view />
+        <router-view :theme="theme" :changeTheme="changeTheme" />
       </n-notification-provider>
     </n-message-provider>
   </n-config-provider>
@@ -22,10 +10,9 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { NMessageProvider, NNotificationProvider, NConfigProvider, NSwitch, NIcon } from 'naive-ui';
+import { NMessageProvider, NNotificationProvider, NConfigProvider, NSwitch } from 'naive-ui';
 import { darkTheme, zhCN, dateZhCN } from 'naive-ui';
 import { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface';
-import { Moon, SunnySharp } from '@vicons/ionicons5';
 import { MessageApiInjection } from 'naive-ui/es/message/src/MessageProvider';
 import { NotificationApiInjection } from 'naive-ui/es/notification/src/NotificationProvider';
 
@@ -42,11 +29,13 @@ export default defineComponent({
     NNotificationProvider,
     NConfigProvider,
     NSwitch,
-    Moon,
-    SunnySharp,
-    NIcon,
   },
-
+  provide() {
+    return {
+      theme: this.theme,
+      changeTheme: this.changeTheme,
+    };
+  },
   setup() {
     const theme = ref<BuiltInGlobalTheme | null>(null);
 

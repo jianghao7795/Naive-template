@@ -4,7 +4,21 @@
       <n-layout has-sider>
         <n-layout-sider content-style="padding: 24px;">海淀桥</n-layout-sider>
         <n-layout>
-          <n-layout-header>颐和园路</n-layout-header>
+          <n-layout-header>
+            颐和园路
+            <n-switch :on-update:value="changeTheme" class="dark-theme-switch">
+              <template #checked>
+                <n-icon size="14" color="#ffd93b">
+                  <Moon />
+                </n-icon>
+              </template>
+              <template #unchecked>
+                <n-icon size="14" color="#ffd93b">
+                  <SunnySharp />
+                </n-icon>
+              </template>
+            </n-switch>
+          </n-layout-header>
           <n-layout-content content-style="padding: 24px;"><router-view /></n-layout-content>
           <n-layout-footer>成府路</n-layout-footer>
         </n-layout>
@@ -13,12 +27,17 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
-import { NLayout, NLayoutFooter, NLayoutHeader, NLayoutContent, NLayoutSider, NSpace, useMessage, useNotification } from 'naive-ui';
+<script lang="ts">
+import { defineComponent, inject } from 'vue';
+import { NLayout, NLayoutFooter, NLayoutHeader, NLayoutContent, NLayoutSider, NSpace, useMessage, useNotification, NIcon, NSwitch } from 'naive-ui';
+import { Moon, SunnySharp } from '@vicons/ionicons5';
 
-export default defineComponent({
+type PropsType = {};
+
+export default defineComponent<PropsType>({
   name: 'BasieLayout',
+  // props: ['theme', 'changeTheme'],
+  // inject: ['theme', 'changeTheme'],
   components: {
     NLayout,
     NLayoutFooter,
@@ -26,11 +45,18 @@ export default defineComponent({
     NLayoutContent,
     NLayoutSider,
     NSpace,
+    Moon,
+    SunnySharp,
+    NIcon,
+    NSwitch,
   },
   setup() {
+    // console.log(theme);
+    const theme = inject('theme');
+    const changeTheme = inject('changeTheme');
     window.$message = useMessage();
     window.$notification = useNotification();
-    return {};
+    return { theme, changeTheme };
   },
 });
 </script>
