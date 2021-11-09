@@ -29,9 +29,9 @@ const routers: RouteRecordRaw[] = [
   {
     path: '/backend',
     name: 'Backend',
-    component: BackendLayout,
+    component: () => import('@/layout/BasieLayout.vue'),
     meta: {
-      transition: 'aside-right', // 不需要缓存
+      // transition: 'aside-right', // 不需要缓存
       index: 20,
     },
     children: [

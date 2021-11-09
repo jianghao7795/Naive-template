@@ -147,7 +147,7 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .view-account {
-  background-image: url('@/assets/images/login1.svg');
+  background-image: url('./src/assets/images/login1.svg');
   background-repeat: no-repeat;
   background-position: 50%;
   background-size: 100%;
@@ -181,7 +181,7 @@ export default defineComponent({
 }
 @media (min-width: 768px) {
   .view-account {
-    background-image: url('@/assets/images/login1.svg');
+    background-image: url('./src/assets/images/login1.svg');
     background-repeat: no-repeat;
     background-position: 50%;
     background-size: 100%;
