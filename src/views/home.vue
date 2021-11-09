@@ -5,11 +5,11 @@
     <br />
     <p>显示: {{ user }}</p>
     <p>show: {{ slide }}</p>
-    <span v-once v-bind:id="dynamicId">Message: {{ msg }}</span>
+    <span v-once v-bind:id="dynamicId">Message: {{ message }}</span>
     <!-- v-once是渲染一次 v-bind-->
     <n-button @click="changeMsg">change msg</n-button>
     <br />
-    <p>{{ msg }}</p>
+    <p>{{ message }}</p>
     <HomeComponent :is="msg"></HomeComponent>
 
     <demo :app="msg"></demo>
@@ -17,17 +17,24 @@
 </template>
 
 <script lang="ts">
-import { NButton } from 'naive-ui';
+import { NButton, useNotification } from 'naive-ui';
 import { ref, defineComponent, onMounted } from 'vue';
 import HomeComponent from '@/views/homeDemo/HomeComponent.vue';
 import Transition from '@/views/transition.vue';
 import axios from '@/utils/axios';
 import { AxiosResponse } from 'axios';
 
-type Menu = {};
+type Menu = {
+  id: number;
+  parent_id: number;
+  name: string;
+  icon: string;
+};
 
 type MenusType = {
   data: Menu[];
+  code: number;
+  msg: string;
 };
 
 export default defineComponent({
@@ -40,13 +47,25 @@ export default defineComponent({
   inject: ['user', 'slide'], // 父级的provide 子级的 inject 接收
   setup() {
     const aa = ref<number>(0);
-    const msg = ref<string>('');
+    const message = ref<string>('');
     const dynamicId = ref<string>('dynamicId');
+    const menusList = ref<Menu[]>([]);
+    const notification = useNotification();
     onMounted(() => {
       axios.get<string, AxiosResponse<MenusType>>('/api/v1/menus-all').then((response) => {
-        console.log(response);
-        const { data } = response.data;
-        console.log(data);
+        // console.log(response);
+        const { data, code, msg } = response.data;
+        // console.log(data);
+        if (code === 200) {
+          menusList.value = data;
+          return;
+        }
+
+        notification.error({
+          title: `请求菜单错误：${code}`,
+          description: msg,
+          duration: 10000,
+        });
       });
     });
     const changeCount = (b: any) => {
@@ -55,12 +74,12 @@ export default defineComponent({
     };
 
     const changeMsg = () => {
-      msg.value = 'wowowowo';
+      message.value = 'wowowowo';
     };
 
     return {
       aa,
-      msg,
+      message,
       dynamicId,
       changeCount,
       changeMsg,

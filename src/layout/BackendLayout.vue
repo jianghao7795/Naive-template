@@ -28,7 +28,16 @@
 
 <script lang="ts">
 import { ref, defineComponent } from 'vue';
-// import { useRoute, onBeforeRouteUpdate } from 'vue-router';
+import { useMessage, useNotification } from 'naive-ui';
+import { NotificationApiInjection } from 'naive-ui/es/notification/src/NotificationProvider';
+import { MessageApiInjection } from 'naive-ui/es/message/src/MessageProvider';
+declare global {
+  interface Window {
+    $message: MessageApiInjection;
+    $notification: NotificationApiInjection;
+  }
+}
+
 export default defineComponent({
   name: 'BackendLayout',
   provide() {
@@ -39,6 +48,8 @@ export default defineComponent({
   },
   setup() {
     // const route = useRoute();
+    window.$message = useMessage();
+    window.$notification = useNotification();
     const slide = ref<string>('slide-left');
     // const;
     // onBeforeRouteUpdate((to, from) => {

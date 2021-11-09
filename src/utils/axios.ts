@@ -6,8 +6,6 @@ type Response = {
   status: number;
 };
 
-// const notification = useNotification();
-
 const showStatus = (status: number) => {
   let message = '';
   switch (status) {
@@ -107,12 +105,16 @@ export type ResponseData = {
 // 响应拦截器
 service.interceptors.response.use(
   (response: AxiosResponse<Response>): AxiosResponse<Response> => {
-    // console.log(response);
+    console.log(response);
     const status = response.status;
     let msg = '';
-    if (status < 200 || status >= 300) {
+    if (status !== 200) {
       // 处理http错误，抛到业务代码
       msg = showStatus(status);
+      window.$notification.error({
+        title: '请求错误： ' + status,
+        description: msg,
+      });
 
       return response;
     }

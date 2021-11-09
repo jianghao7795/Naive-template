@@ -81,12 +81,17 @@ export default defineComponent({
     const image = ref<string>();
     const getImage = () => {
       axios.get<{}, AxiosResponse<ImageType>>(`/user/captcha`).then((resp: AxiosResponse<ImageType>) => {
-        const { code, data } = resp.data;
+        const { code, data, msg } = resp.data;
         if (code === 200) {
           image.value = data.picPath;
+          return;
         }
 
-        // console.log(resp);
+        notification.error({
+          title: '请求失败' + code,
+          content: '',
+          meta: msg,
+        });
       });
     };
     onMounted(() => {
