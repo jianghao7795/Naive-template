@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, provide } from 'vue';
 import { NMessageProvider, NNotificationProvider, NConfigProvider, NSwitch } from 'naive-ui';
 import { darkTheme, zhCN, dateZhCN } from 'naive-ui';
 import { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface';
@@ -30,15 +30,9 @@ export default defineComponent({
     NConfigProvider,
     NSwitch,
   },
-  provide() {
-    return {
-      theme: this.theme,
-      changeTheme: this.changeTheme,
-    };
-  },
   setup() {
     const theme = ref<BuiltInGlobalTheme | null>(null);
-
+    provide('theme', theme);
     const changeTheme = (e: boolean) => {
       // console.log(e);
       if (e) {
@@ -47,6 +41,7 @@ export default defineComponent({
         theme.value = null;
       }
     };
+    provide('changeTheme', changeTheme);
     return {
       // darkTheme,
       zhCN,

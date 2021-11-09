@@ -31,6 +31,7 @@
 import { defineComponent, inject } from 'vue';
 import { NLayout, NLayoutFooter, NLayoutHeader, NLayoutContent, NLayoutSider, NSpace, useMessage, useNotification, NIcon, NSwitch } from 'naive-ui';
 import { Moon, SunnySharp } from '@vicons/ionicons5';
+import { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface';
 
 type PropsType = {};
 
@@ -52,8 +53,8 @@ export default defineComponent<PropsType>({
   },
   setup() {
     // console.log(theme);
-    const theme = inject('theme');
-    const changeTheme = inject('changeTheme');
+    const theme = inject<BuiltInGlobalTheme | null>('theme');
+    const changeTheme = inject<(e: boolean) => void>('changeTheme');
     window.$message = useMessage();
     window.$notification = useNotification();
     return { theme, changeTheme };
@@ -61,18 +62,6 @@ export default defineComponent<PropsType>({
 });
 </script>
 
-<style>
-.n-layout-header,
-.n-layout-footer {
-  background: rgba(128, 128, 128, 0.2);
-  padding: 24px;
-}
-
-.n-layout-sider {
-  background: rgba(128, 128, 128, 0.3);
-}
-
-.n-layout-content {
-  background: rgba(128, 128, 128, 0.4);
-}
+<style scoped lang="less">
+@import './src/styles/layout.less';
 </style>
