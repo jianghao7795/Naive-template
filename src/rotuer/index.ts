@@ -5,9 +5,17 @@ const routers: RouteRecordRaw[] = [
     path: '/home',
     name: 'home',
     meta: {
-      title: 'Demo',
+      title: 'home',
     },
     component: () => import('@/views/homeDemo/HomeComponent.vue'),
+  },
+  {
+    path: '/demo',
+    name: 'demo',
+    meta: {
+      title: 'Demo',
+    },
+    component: () => import('@/views/homeDemo/demo.vue'),
   },
   {
     path: '/',

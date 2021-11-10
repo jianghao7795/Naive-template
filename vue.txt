@@ -1,0 +1,30 @@
+emits:["父方法名"]
+setup(props,{emit}) {
+//使用
+  props.数据
+  emit("父方法名", 参数);
+}
+
+unref
+作用是返回数据,如果这个数据是ref类型就返回ref类型,如果不是ref类型就返回现在的类型
+
+isRef
+判断是不是ref形式的对象。
+
+toRefs toRef
+toRef 是 把reactive 对象变为 ref
+
+
+setup()
+2.参数context的讲解
+第2个参数：context，是一个对象。
+里面有attrs(获取当前标签上的所有属性的对象)
+但是该属性是props中没有声明接收的所有的对象。
+如果你使用props去获取值，同时props中你声明了你要获取的值
+则：获取的值是undefined
+注意点：
+attrs获取值是不需要props中没有声明接收。
+第1个参数props获取值是需要props中声明接收的
+
+有emit事件分发,(传递给父组件需要使用该事件)
+有slots插槽
