@@ -17,12 +17,12 @@
 </template>
 
 <script lang="ts">
-import { NButton, useNotification } from 'naive-ui';
+import { NButton } from 'naive-ui';
 import { ref, defineComponent, onMounted } from 'vue';
 import HomeComponent from '@/views/homeDemo/HomeComponent.vue';
 import Transition from '@/views/transition.vue';
-import axios from '@/utils/axios';
-import { AxiosResponse } from 'axios';
+// import axios from '@/utils/axios';
+// import { AxiosResponse } from 'axios';
 
 type Menu = {
   id: number;
@@ -49,24 +49,25 @@ export default defineComponent({
     const aa = ref<number>(0);
     const message = ref<string>('');
     const dynamicId = ref<string>('dynamicId');
-    const menusList = ref<Menu[]>([]);
-    const notification = useNotification();
+    const msg = ref<string>('');
+    // const menusList = ref<Menu[]>([]);
+    // const notification = useNotification();
     onMounted(() => {
-      axios.get<string, AxiosResponse<MenusType>>('/api/v1/menus-all').then((response) => {
-        // console.log(response);
-        const { data, code, msg } = response.data;
-        // console.log(data);
-        if (code === 200) {
-          menusList.value = data;
-          return;
-        }
-
-        notification.error({
-          title: `请求菜单错误：${code}`,
-          description: msg,
-          duration: 10000,
-        });
-      });
+      // axios.get<{}, AxiosResponse<MenusType>>('/api/v1/menus-all').then((response) => {
+      //   // console.log(response);
+      //   const { data, code, msg } = response.data;
+      //   // console.log(data);
+      //   if (code === 200) {
+      //     menusList.value = data;
+      //     return;
+      //   }
+      //
+      //   notification.error({
+      //     title: `请求菜单错误：${code}`,
+      //     description: msg,
+      //     duration: 10000,
+      //   });
+      // });
     });
     const changeCount = (b: any) => {
       console.log(b);
@@ -78,6 +79,7 @@ export default defineComponent({
     };
 
     return {
+      msg,
       aa,
       message,
       dynamicId,

@@ -114,13 +114,13 @@ service.interceptors.response.use(
         description: msg,
         duration: 10000,
       });
-
+      // console.log(router);
       if (status === 401) {
         router
           .push({
             path: '/login',
             query: {
-              redirect: router.currentRoute.value.fullPath,
+              redirect: router.currentRoute.value.path,
             },
           })
           .then((r) => r);

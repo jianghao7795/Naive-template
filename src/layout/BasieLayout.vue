@@ -19,7 +19,18 @@
               </template>
             </n-switch>
           </n-layout-header>
-          <n-layout-content content-style="padding: 24px;"><router-view /></n-layout-content>
+          <n-layout-content content-style="padding: 24px;">
+            <RouterView>
+              <template v-slot="{ Component, route }">
+                <transition name="fade-slide" mode="out-in" appear>
+                  <keep-alive>
+                    <component :is="Component" :key="route.fullPath" />
+                  </keep-alive>
+                  <!--          <component v-else :is="Component" :key="route.fullPath" />-->
+                </transition>
+              </template>
+            </RouterView>
+          </n-layout-content>
           <n-layout-footer>成府路</n-layout-footer>
         </n-layout>
       </n-layout>
@@ -28,10 +39,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, onMounted } from 'vue';
 import { NLayout, NLayoutFooter, NLayoutHeader, NLayoutContent, NLayoutSider, NSpace, useMessage, useNotification, NIcon, NSwitch } from 'naive-ui';
 import { Moon, SunnySharp } from '@vicons/ionicons5';
 import { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface';
+import menus from '@/api/menus';
 
 type PropsType = {};
 
@@ -53,6 +65,15 @@ export default defineComponent<PropsType>({
   },
   setup() {
     // console.log(theme);
+    onMounted(() => {
+      menus.getList().then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          const { code, data, msg } = response.data;
+          console.log(code, data, msg);
+        }
+      });
+    });
     const theme = inject<BuiltInGlobalTheme | null>('theme');
     const changeTheme = inject<(e: boolean) => void>('changeTheme');
     window.$message = useMessage();
