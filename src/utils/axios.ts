@@ -9,7 +9,7 @@ type Response = {
 };
 
 const showStatus = (status: number, errorMessage: string) => {
-  let message = '';
+  let message: string;
   switch (status) {
     case 400:
       message = '请求错误(400)';
@@ -118,7 +118,7 @@ service.interceptors.response.use(
       if (status === 401) {
         router
           .push({
-            path: '/login',
+            path: '/user/login',
             query: {
               redirect: router.currentRoute.value.path,
             },
