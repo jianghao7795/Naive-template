@@ -2,6 +2,14 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
 const routers: RouteRecordRaw[] = [
   {
+    path: '/home',
+    name: 'home',
+    meta: {
+      title: 'Demo',
+    },
+    component: () => import('@/views/homeDemo/HomeComponent.vue'),
+  },
+  {
     path: '/',
     name: 'yield',
     redirect: '/user/login',
@@ -70,6 +78,11 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // console.log(to, from, next);
   // 跳转处理;
+  if (to.meta.title) {
+    document.title = to.meta.title as string;
+  } else {
+    document.title = 'Vite';
+  }
   next();
 });
 

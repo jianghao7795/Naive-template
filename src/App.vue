@@ -2,7 +2,7 @@
   <n-config-provider :theme="theme" :locale="zhCN" :date-locale="dateZhCN">
     <n-message-provider>
       <n-notification-provider>
-        <router-view :theme="theme" :changeTheme="changeTheme" />
+        <router-view :v-wechat-title="route.meta.title" />
       </n-notification-provider>
     </n-message-provider>
   </n-config-provider>
@@ -11,6 +11,7 @@
 <script lang="ts">
 import { defineComponent, ref, provide } from 'vue';
 import { NMessageProvider, NNotificationProvider, NConfigProvider, NSwitch } from 'naive-ui';
+import { useRoute } from 'vue-router';
 import { darkTheme, zhCN, dateZhCN } from 'naive-ui';
 import { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface';
 import { MessageApiInjection } from 'naive-ui/es/message/src/MessageProvider';
@@ -32,7 +33,9 @@ export default defineComponent({
   },
   setup() {
     const theme = ref<BuiltInGlobalTheme | null>(null);
+    const route = useRoute();
     provide('theme', theme);
+    // console.log(route);
     const changeTheme = (e: boolean) => {
       // console.log(e);
       if (e) {
@@ -48,6 +51,7 @@ export default defineComponent({
       dateZhCN,
       theme,
       changeTheme,
+      route,
     };
   },
 });
