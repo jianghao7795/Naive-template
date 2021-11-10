@@ -1,31 +1,27 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import Home from '@/views/home.vue';
-import About from '@/views/about.vue';
-import BackendLayout from '@/layout/BackendLayout.vue';
-import Login from '@/views/login/login.vue';
 
 const routers: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'yield',
-    redirect: '/login',
+    redirect: '/user/login',
   },
   {
-    path: '/todo',
-    name: 'todo',
-    meta: {
-      index: 1,
-    },
-    component: () => import('@/views/todo/index.vue'),
+    path: '/user',
+    name: 'user',
+    component: () => import('@/layout/LoginLayout.vue'),
+    children: [
+      {
+        path: 'login',
+        name: 'login',
+        component: () => import('@/views/login/login.vue'),
+        meta: {
+          index: 2,
+        },
+      },
+    ],
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: Login,
-    meta: {
-      index: 2,
-    },
-  },
+
   {
     path: '/backend',
     name: 'Backend',
@@ -38,7 +34,7 @@ const routers: RouteRecordRaw[] = [
       {
         path: 'home',
         name: 'Home',
-        component: Home,
+        component: () => import('@/views/home.vue'),
         meta: {
           index: 21,
         },
@@ -46,10 +42,18 @@ const routers: RouteRecordRaw[] = [
       {
         path: 'about',
         name: 'About',
-        component: About,
+        component: () => import('@/views/about.vue'),
         meta: {
           index: 22,
         },
+      },
+      {
+        path: 'todo',
+        name: 'todo',
+        meta: {
+          index: 23,
+        },
+        component: () => import('@/views/todo/index.vue'),
       },
     ],
     // meta: { transition: 'aside-right' },
