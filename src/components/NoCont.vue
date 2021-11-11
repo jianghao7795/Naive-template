@@ -1,5 +1,9 @@
 <template>
-  <div @click="sonHander">{{ mytitle.title }}我是子组件中的数据</div>
+  <div @click="sonHander">
+    {{ mytitle.title }}
+    <br />
+    我是子组件中的数据
+  </div>
 </template>
 
 <script lang="ts">
