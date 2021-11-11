@@ -14,6 +14,7 @@ isRef
 toRefs toRef
 toRef 是 把reactive 对象变为 ref
 
+hooks 是为了 代替 minix
 
 setup()
 2.参数context的讲解
@@ -28,3 +29,68 @@ attrs获取值是不需要props中没有声明接收。
 
 有emit事件分发,(传递给父组件需要使用该事件)
 有slots插槽
+
+
+ref复制， 修改响应式数据，不会影响以前的数据，界面会更改。
+toRef引用， 修改响应式的数据，会影响以前的数据，界面不会更新。
+
+toRef的使用场景
+如果想让响应式数据和原始数据关联起来。
+并且更新响应式数据后，不想视图更新；那么就可以使用toRef
+
+
+简单介绍下面的代码功能：
+使用ref函数，去使用监听某一个变量的变化，并且把它渲染到视图上。
+setUp函数是组合API的入口函数。这个是非常重要的。
+setUp可以去监听变量的变化哈！我们将会利用它
+ref 在vue中内置，需要导入。
+ref函数只能够去监听简单类型的数据变化。
+不能够去监听，复杂类型的变化。
+所以我们的主角reactive就出现了。
+setup 中的函数会自动执行一次。
+
+3.setUp函数的注意点
+(1)由于我们不能够在setUp函数中使用data和methods.
+所以vue为了避免我们的错误使用,直接将setUp函数中的this
+修改成为了undefined
+
+(2) setUp函数只能够数同步的，不能够是异步的哈。
+就是说你不能够这样操作
+async setup(){
+
+},
+这样会导致界面空白哈
+
+
+1.ref和reactive-样
+也是用来实现响应式数据的方法
+由于reactive必须传递一个对象，
+所以导致在企业开发中如果我们只想让某个变量实现响应式的时候会非常麻烦
+所以Vue3就给我们提供了ref方法，实现对简单值的监听
+
+2.ref本质:
+ref底层的本质其实还是reactive
+系统会自动根据我们给ref传入的值将它转换成
+ref(xx) -> reactive({value:xx})
+
+3.ref注意点:
+在Vue的html中使用ref的值不用通过value获取
+在JS中使用ref的值必须通过value获取
+
+
+watch属性中immediate，deep 的用法
+immediate:true 表示的是会默认执行一次watch，
+这样界面初次渲染数据才能够正确的显示姓和名的拼接。
+
+deep:true,表示的是会进行深度的监听,
+当我们监听的是一个对象，对象中的任何一个值发生变化的时候。
+watch就会监听到.
+
+
+provide和inject可以实现嵌套组件之间进行传递数据。
+这两个函数都是在setup函数中使用的。
+父级组件使用provide向下进行传递数据；
+子级组件使用inject来获取上级组件传递过来的数据；
+需要注意的是：
+1==>provide只能够向下进行传递数据
+2==>在使用provide和inject的时候需从vue中引入
