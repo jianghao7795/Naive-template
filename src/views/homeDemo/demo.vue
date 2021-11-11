@@ -24,9 +24,9 @@ import { NButton, NInput } from 'naive-ui';
 export default defineComponent({
   name: 'demo',
   setup() {
-    let msg = {
+    const msg = reactive({
       title: '父组件给子给子组件的数据',
-    };
+    });
     const count = ref<number>(0);
     const reactiveCount = reactive({
       name: 'wuwuwuwuwuuw',
@@ -34,6 +34,7 @@ export default defineComponent({
     });
     const sonclick = (msss: string) => {
       console.log(msss);
+      msg.title = '55555';
     };
 
     const changeCount = () => {
