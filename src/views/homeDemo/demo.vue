@@ -14,16 +14,21 @@
       <n-input placeholder="姓名" v-model:value="username"></n-input>
     </div>
   </div>
+  <div><n-input v-model:value="debounceCurrValue" /></div>
+  <p>{{ debounceValue }}</p>
 </template>
 
 <script lang="ts">
 import NoCont from '@/components/NoCont.vue';
 import { defineComponent, ref, reactive, computed } from 'vue';
 import { NButton, NInput } from 'naive-ui';
+import { useDebounce } from 'v3hooks';
 
 export default defineComponent({
   name: 'demo',
   setup() {
+    const debounceCurrValue = ref<string>('');
+    const debounceValue = useDebounce(debounceCurrValue, 1000);
     const msg = reactive({
       title: '父组件给子给子组件的数据',
     });
@@ -66,7 +71,7 @@ export default defineComponent({
     //     user.ming = names[1];
     //   },
     // });
-    return { msg, sonclick, count, reactiveCount, changeCount, changeReactiveCount, user, username };
+    return { msg, sonclick, count, reactiveCount, changeCount, changeReactiveCount, user, username, debounceValue, debounceCurrValue };
   },
   components: {
     NoCont,
