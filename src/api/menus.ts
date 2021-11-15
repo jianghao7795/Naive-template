@@ -17,11 +17,13 @@ type MenusType = {
 };
 
 const getList = () => {
-  return axios.get<{ Authorization: string }, AxiosResponse<MenusType>>('/api/v1/menus-all', {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  });
+  return axios
+    .get<{ Authorization: string }, AxiosResponse<MenusType>>('/api/v1/menus-all', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
+    .then((res) => res.data);
 };
 
 export default { getList };

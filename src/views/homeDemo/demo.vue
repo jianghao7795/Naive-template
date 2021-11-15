@@ -16,17 +16,25 @@
   </div>
   <div><n-input v-model:value="debounceCurrValue" /></div>
   <p>{{ debounceValue }}</p>
+  <p>{{ data }}</p>
+  <img :src="data?.data?.picPath" />
+  <p>{{ loading }}</p>
 </template>
 
 <script lang="ts">
 import NoCont from '@/components/NoCont.vue';
-import { defineComponent, ref, reactive, computed } from 'vue';
+import { defineComponent, ref, reactive, computed, onMounted, watchEffect } from 'vue';
 import { NButton, NInput } from 'naive-ui';
-import { useDebounce } from 'v3hooks';
+import { useDebounce, useRequest } from 'v3hooks';
+// import request from '@/hooks/useRequest/request';
+import Captcha from '@/api/captcha';
+import type { Captcha as CaptchaType } from '@/api/captcha';
+// import { AxiosResponse } from 'axios';
 
 export default defineComponent({
   name: 'demo',
   setup() {
+    // const captchaData = ref<CaptchaType>();
     const debounceCurrValue = ref<string>('');
     const debounceValue = useDebounce(debounceCurrValue, 1000);
     const msg = reactive({
@@ -55,11 +63,48 @@ export default defineComponent({
       ming: 'asfasf',
     });
 
-    const username = computed((a, b) => {
-      console.log(a, b);
+    const username = computed(() => {
+      // console.log(a, b);
       return user.xing + '_' + user.ming;
     });
+    onMounted(() => {
+      // const response = Captcha.captcha();
+      // console.log(response);
+      // const { data, loading } = useRequest<CaptchaType>(() => {
+      //   return Captcha.captcha().then((res) => res.data);
+      // });
+      // // captchaData = data;
+      // console.log(data, loading.value);
+    });
 
+    const { data, loading, run } = useRequest<CaptchaType>(
+      () => {
+        return Captcha.captcha();
+      },
+      {
+        manual: true,
+      },
+    );
+    // captchaData = data;
+    // captchaData.value = data;
+    // console.log((captchaData.value = data.value));
+    watchEffect(() => {
+      // const { value } = data;
+      // console.log(data.value, loading.value);
+      // if (data.value) {
+      //   captchaData.value = data.value;
+      // }
+      if (loading.value) {
+        console.log(loading.value);
+        // run();
+      } else {
+        console.log(loading.value);
+      }
+    });
+    // run();
+    // const { data, loading } = request();
+    //
+    // console.log(data.value, loading);
     // const username = computed({
     //   get: () => {
     //     return `${user.xing}_${user.ming}`;
@@ -71,10 +116,11 @@ export default defineComponent({
     //     user.ming = names[1];
     //   },
     // });
-    return { msg, sonclick, count, reactiveCount, changeCount, changeReactiveCount, user, username, debounceValue, debounceCurrValue };
+    return { msg, sonclick, count, reactiveCount, changeCount, changeReactiveCount, user, username, debounceValue, debounceCurrValue, data, loading };
   },
   components: {
     NoCont,
+    // data,
     NButton,
     NInput,
   },

@@ -68,8 +68,8 @@ export default defineComponent<PropsType>({
     onMounted(() => {
       menus.getList().then((response) => {
         console.log(response);
-        if (response.status === 200) {
-          const { code, data, msg } = response.data;
+        if (response.code === 200) {
+          const { code, data, msg } = response;
           console.log(code, data, msg);
         }
       });
