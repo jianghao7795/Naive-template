@@ -2,6 +2,14 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
 const routers: RouteRecordRaw[] = [
   {
+    path: '/slot',
+    name: 'slot',
+    meta: {
+      title: 'slot',
+    },
+    component: () => import('@/views/slot/parent.vue'),
+  },
+  {
     path: '/home',
     name: 'home',
     meta: {
