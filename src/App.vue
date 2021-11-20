@@ -12,8 +12,8 @@ type Item = {
   id: number;
   name: string;
 };
-// import { useRoute } from 'vue-router';
-// const route = useRoute();
+import { useRoute } from 'vue-router';
+const route = useRoute();
 const aa = ref('fasdfasdf');
 const getUser = async () => {
   const response = await request.get<any, AxiosResponse<ResponseData<Item>>>('/api/users');
