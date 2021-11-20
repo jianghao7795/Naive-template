@@ -1,8 +1,15 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import type Response from './Axios';
+// import { useRouter, useRoute } from 'vue-router';
+import router from '@/rotuer/index';
 
-const showStatus = (status: number) => {
-  let message = '';
+type Response = {
+  data: { code: number; msg: string; data: any };
+  status: number;
+  msg: string;
+};
+
+const showStatus = (status: number, errorMessage: string) => {
+  let message: string;
   switch (status) {
     case 400:
       message = '请求错误(400)';
@@ -40,18 +47,23 @@ const showStatus = (status: number) => {
     default:
       message = `连接出错(${status})!`;
   }
-  return `${message}，请检查网络或联系管理员！`;
+  return `${message}! ${errorMessage}`;
 };
 
 const service = axios.create({
   // 联调
-  baseURL: '/',
+  url: '/',
+  baseURL: 'http://192.168.71.131:4100',
   headers: {
     'Content-Type': 'application/json;charset=utf-8',
-    authorization: `Bearer ${localStorage.getItem('token')}`,
+    // 'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Headers': 'content-type',
+    Authorization: localStorage.getItem('token') ? `Bearer ${localStorage.getItem('token')}` : '',
+    mode: 'cors',
   },
+
   // 是否跨站点访问控制请求
-  withCredentials: true,
+  // withCredentials: true,
   timeout: 30000,
   transformRequest: [
     (data) => {
@@ -86,32 +98,39 @@ service.interceptors.request.use(
   },
 );
 
-export type ResponseData = {
-  code: number;
-  data: any;
-  msg: null | string;
-};
-
 // 响应拦截器
 service.interceptors.response.use(
-  (response: AxiosResponse<any>) => {
+  (response: AxiosResponse<Response>): AxiosResponse<Response> => {
+    // console.log(response);
+
     const status = response.status;
-    let msg = '';
-    if (status < 200 || status >= 300) {
+    const errorMessage = response.data.msg;
+    if (status !== 200) {
       // 处理http错误，抛到业务代码
-      msg = showStatus(status);
-      if (typeof response.data === 'string') {
-        response.data = { msg };
-      } else {
-        response.data.msg = msg;
+
+      const msg = showStatus(status, errorMessage);
+      window.$notification.error({
+        title: '请求错误： ' + status,
+        description: msg,
+        duration: 10000,
+      });
+      // console.log(router);
+      if (status === 401) {
+        router
+          .push({
+            path: '/user/login',
+            query: {
+              redirect: router.currentRoute.value.path,
+            },
+          })
+          .then((r) => r);
       }
+
+      return response;
     }
     return response;
   },
   (error) => {
-    // 错误抛到业务代码
-    error.data = {};
-    error.data.msg = '请求超时或服务器异常，请检查网络或联系管理员！';
     return Promise.resolve(error);
   },
 );

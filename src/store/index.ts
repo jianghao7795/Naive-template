@@ -13,18 +13,9 @@ type Item = {
   count: number;
 };
 
-const store = createStore({
-  actions: {
-    incrementAsync({ commit }) {
-      setTimeout(() => {
-        commit('increment');
-      }, 1000);
-    },
-  },
-});
-
 const state = {
-  todos: [],
+  todos: [] as Item[],
+  count: 0,
 };
 
 const getters = {
@@ -47,3 +38,11 @@ const actions = {
     }, 1000);
   },
 };
+const store = createStore({
+  state,
+  getters,
+  mutations,
+  actions,
+});
+
+export default store;

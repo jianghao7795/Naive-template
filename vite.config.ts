@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import vue from '@vitejs/plugin-vue';
-import { viteMockServe } from 'vite-plugin-mock';
-import styleImport from 'vite-plugin-style-import';
+// import { viteMockServe } from 'vite-plugin-mock';
+// import styleImport from 'vite-plugin-style-import';
 import viteCompression from 'vite-plugin-compression';
 // import path from 'path';
 
@@ -36,7 +36,7 @@ const config = defineConfig({
   },
   plugins: [
     vue(),
-    viteMockServe({}),
+    // viteMockServe({}),
     // styleImport({
     //   libs: [
     //     {
@@ -58,6 +58,7 @@ const config = defineConfig({
   //  baseUrl: "./",
   server: {
     host: '0.0.0.0',
+    port: 8080,
   },
   resolve: {
     alias: {

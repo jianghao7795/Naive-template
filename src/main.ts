@@ -1,7 +1,9 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './rotuer';
+import store from './store';
 import 'vfonts/FiraCode.css';
+import './styles/index.less';
 
 const baseApp = createApp(App);
 // console.log(baseApp.config);
@@ -28,4 +30,4 @@ baseApp.config.warnHandler = (msg, vm, trace) => {
 baseApp.config.errorHandler = (err, vm, info) => {
   // console.log(err, vm, info);
 };
-baseApp.use(router).mount('#app');
+baseApp.use(router).use(store).mount('#app');
