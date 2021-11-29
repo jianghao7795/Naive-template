@@ -28,7 +28,18 @@
           <n-button @click="handleSubmit" class="other" size="large" type="primary">登录</n-button>
         </n-form-item>
       </n-form>
-      <n-button @click="notify('info')">信息</n-button>
+      <!-- <n-form :model="formData" :rules="rules" ref="formRef">
+        <n-form-item path="user.name">
+          <n-input v-model:value="formData.username" placeholder="输入姓名" />
+        </n-form-item>
+        <n-form-item path="phone">
+          <n-input placeholder="密码" type="password" v-model:value="formData.password" />
+        </n-form-item>
+        <n-form-item>
+          <n-button @click="handleValidateClick" attr-type="button">验证</n-button>
+        </n-form-item>
+      </n-form>
+      <n-button @click="notify('info')">信息</n-button> -->
     </div>
   </div>
 </template>
@@ -73,7 +84,7 @@ export default defineComponent({
   setup() {
     const notification = useNotification();
     const router = useRouter();
-    const formData = reactive({
+    const formData = ref({
       username: '',
       password: '',
       captcha: '',
@@ -97,12 +108,18 @@ export default defineComponent({
     onMounted(() => {
       getImage();
     });
+    const formRef = ref<HTMLFormElement>();
     return {
+      formRef,
       formData,
       image,
       logo: '@/assets/head.png',
       getImage,
       handleSubmit: () => {
+        // console.log(formRef.value);
+        formRef.value?.validate((err: any) => {
+          console.log(err);
+        });
         // router.replace('/dashboard/control');
         axios.post<typeof formData, AxiosResponse<LoginType>>('/user/login', { ...formData }).then((resp) => {
           // console.log(resp);
@@ -125,21 +142,37 @@ export default defineComponent({
           });
         });
       },
-      notify: (type: string) => {
-        console.log(type);
-        notification.error({
-          content: '说点啥呢',
-          meta: '想不出来',
-        });
-      },
+      // notify: (type: string) => {
+      //   console.log(type);
+      //   notification.error({
+      //     content: '说点啥呢',
+      //     meta: '想不出来',
+      //   });
+      // },
       rules: {
         username: {
           required: true,
-          message: '请输入用户名！',
-          trigger: 'blur',
+          message: '请输入用户名',
+          trigger: ['input'],
         },
-        password: { required: true, message: '请输入密码！', trigger: 'blur' },
+        password: {
+          required: true,
+          message: '请输入密码',
+          trigger: ['input'],
+        },
       },
+      // handleValidateClick() {
+      //   console.log('123123');
+      //   formRef.value?.validate((errors) => {
+      //     console.log(errors);
+      //     if (!errors) {
+      //       message.success('Valid');
+      //     } else {
+      //       console.log(errors);
+      //       message.error('Invalid');
+      //     }
+      //   });
+      // },
     };
   },
 });
