@@ -81,15 +81,15 @@ const rules = {
     type: 'boolean',
     trigger: 'change',
     message: '请点击按钮进行验证码校验',
-    validator: (_, value) => value === true,
+    validator: (_: any, value: boolean) => value === true,
   },
 };
 // const userStore = useUserStore();
 const router = useRouter();
 const route = useRoute();
-const handleSubmit = (e) => {
+const handleSubmit = (e: MouseEvent) => {
   e.preventDefault();
-  formRef.value.validate(async (errors) => {
+  formRef.value.validate(async (errors: any) => {
     if (!errors) {
       const { username, password } = formInline;
       message.loading('登录中...');
