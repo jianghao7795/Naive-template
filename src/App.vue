@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, provide } from 'vue';
+import { defineComponent, ref, provide, getCurrentInstance } from 'vue';
 import { NMessageProvider, NNotificationProvider, NConfigProvider, NSwitch } from 'naive-ui';
 import { useRoute } from 'vue-router';
 import { darkTheme, zhCN, dateZhCN } from 'naive-ui';
@@ -33,6 +33,8 @@ export default defineComponent({
   },
   setup() {
     const theme = ref<BuiltInGlobalTheme | null>(null);
+    const { proxy } = getCurrentInstance(); //对应config.globalProperties
+    console.log(proxy);
     const route = useRoute();
     provide('theme', theme);
     // console.log(route);

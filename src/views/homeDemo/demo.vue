@@ -22,50 +22,50 @@
 </template>
 
 <script lang="ts">
-import NoCont from '@/components/NoCont.vue';
-import { defineComponent, ref, reactive, computed, onMounted, watchEffect } from 'vue';
-import { NButton, NInput } from 'naive-ui';
-import { useDebounce, useRequest } from 'v3hooks';
+import NoCont from "@/components/NoCont.vue";
+import { defineComponent, ref, reactive, computed, onMounted, watchEffect, h } from "vue";
+import { NButton, NInput } from "naive-ui";
+import { useDebounce, useRequest } from "v3hooks";
 // import request from '@/hooks/useRequest/request';
-import Captcha from '@/api/captcha';
-import type { Captcha as CaptchaType } from '@/api/captcha';
+import Captcha from "@/api/captcha";
+import type { Captcha as CaptchaType } from "@/api/captcha";
 // import { AxiosResponse } from 'axios';
 
 export default defineComponent({
-  name: 'demo',
+  name: "demo",
   setup() {
     // const captchaData = ref<CaptchaType>();
-    const debounceCurrValue = ref<string>('');
+    const debounceCurrValue = ref<string>("");
     const debounceValue = useDebounce(debounceCurrValue, 1000);
     const msg = reactive({
-      title: '父组件给子给子组件的数据',
+      title: "父组件给子给子组件的数据",
     });
     const count = ref<number>(0);
     const reactiveCount = reactive({
-      name: 'wuwuwuwuwuuw',
-      title: 'heheheehehehehe',
+      name: "wuwuwuwuwuuw",
+      title: "heheheehehehehe",
     });
     const sonclick = (msss: string) => {
       console.log(msss);
-      msg.title = '55555';
+      msg.title = "55555";
     };
 
     const changeCount = () => {
       count.value++;
     };
     const changeReactiveCount = () => {
-      reactiveCount.name = 'jijijijiji';
-      reactiveCount.title = 'bababa';
+      reactiveCount.name = "jijijijiji";
+      reactiveCount.title = "bababa";
     };
 
     const user = reactive({
-      xing: 'wo',
-      ming: 'asfasf',
+      xing: "wo",
+      ming: "asfasf",
     });
 
     const username = computed(() => {
       // console.log(a, b);
-      return user.xing + '_' + user.ming;
+      return user.xing + "_" + user.ming;
     });
     onMounted(() => {
       // const response = Captcha.captcha();
@@ -83,7 +83,7 @@ export default defineComponent({
       },
       {
         manual: true,
-      },
+      }
     );
     // captchaData = data;
     // captchaData.value = data;
@@ -116,7 +116,20 @@ export default defineComponent({
     //     user.ming = names[1];
     //   },
     // });
-    return { msg, sonclick, count, reactiveCount, changeCount, changeReactiveCount, user, username, debounceValue, debounceCurrValue, data, loading };
+    return {
+      msg,
+      sonclick,
+      count,
+      reactiveCount,
+      changeCount,
+      changeReactiveCount,
+      user,
+      username,
+      debounceValue,
+      debounceCurrValue,
+      data,
+      loading,
+    };
   },
   components: {
     NoCont,
