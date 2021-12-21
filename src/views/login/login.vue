@@ -5,11 +5,17 @@
       <div class="view-account-top">
         <!-- <div class="view-account-top-logo">
           <img src="~@/assets/images/account-logo.png" alt="" />
-        </div> -->
+        </div>-->
         <div class="view-account-top-desc">Naive Ui Admin</div>
       </div>
       <div class="view-account-form">
-        <n-form ref="formRef" label-placement="left" size="large" :model="formInline" :rules="rules">
+        <n-form
+          ref="formRef"
+          label-placement="left"
+          size="large"
+          :model="formInline"
+          :rules="rules"
+        >
           <n-form-item path="username">
             <n-input v-model:value="formInline.username" placeholder="请输入用户名">
               <template #prefix>
@@ -20,7 +26,11 @@
             </n-input>
           </n-form-item>
           <n-form-item path="password">
-            <n-input v-model:value="formInline.password" type="password" show-password-toggle placeholder="请输入密码">
+            <n-input
+              v-model:value="formInline.password"
+              type="password"
+              placeholder="请输入密码"
+            >
               <template #prefix>
                 <n-icon size="18" color="#808695">
                   <LockClosedOutline />
@@ -30,7 +40,12 @@
           </n-form-item>
           <n-form-item path="isCaptcha">
             <div class="w-full">
-              <mi-captcha width="384" theme-color="#2d8cf0" :logo="logo" @success="onAuthCode" />
+              <mi-captcha
+                width="384"
+                theme-color="#2d8cf0"
+                :logo="logo"
+                @success="onAuthCode"
+              />
             </div>
           </n-form-item>
           <n-form-item class="default-color">
@@ -44,7 +59,14 @@
             </div>
           </n-form-item>
           <n-form-item>
-            <n-button type="primary" @click="handleSubmit" size="large" :loading="loading" block>登录</n-button>
+            <n-button
+              type="primary"
+              @click="handleSubmit"
+              size="large"
+              :loading="loading"
+              block
+              >登录</n-button
+            >
           </n-form-item>
         </n-form>
       </div>
@@ -53,13 +75,18 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { reactive, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 // import { useUserStore } from '@/store/modules/user';
-import { useMessage } from 'naive-ui';
+import { useMessage } from "naive-ui";
 // import { ResultEnum } from '@/enums/httpEnum';
-import logo from '@/assets/images/logo.png';
-import { PersonOutline, LockClosedOutline, LogoGithub, LogoFacebook } from '@vicons/ionicons5';
+import logo from "@/assets/images/logo.png";
+import {
+  PersonOutline,
+  LockClosedOutline,
+  LogoGithub,
+  LogoFacebook,
+} from "@vicons/ionicons5";
 interface FormState {
   username: string;
   password: string;
@@ -69,18 +96,18 @@ const message = useMessage();
 const loading = ref(false);
 const autoLogin = ref(true);
 const formInline = reactive({
-  username: 'admin',
-  password: '123456',
+  username: "admin",
+  password: "123456",
   isCaptcha: false,
 });
 const rules = {
-  username: { required: true, message: '请输入用户名', trigger: 'blur' },
-  password: { required: true, message: '请输入密码', trigger: 'blur' },
+  username: { required: true, message: "请输入用户名", trigger: "blur" },
+  password: { required: true, message: "请输入密码", trigger: "blur" },
   isCaptcha: {
     required: true,
-    type: 'boolean',
-    trigger: 'change',
-    message: '请点击按钮进行验证码校验',
+    type: "boolean",
+    trigger: "change",
+    message: "请点击按钮进行验证码校验",
     validator: (_: any, value: boolean) => value === true,
   },
 };
@@ -92,7 +119,7 @@ const handleSubmit = (e: MouseEvent) => {
   formRef.value.validate(async (errors: any) => {
     if (!errors) {
       const { username, password } = formInline;
-      message.loading('登录中...');
+      message.loading("登录中...");
       loading.value = true;
       const params: FormState = {
         username,
@@ -111,7 +138,7 @@ const handleSubmit = (e: MouseEvent) => {
       //   message.info(msg || '登录失败');
       // }
     } else {
-      message.error('请填写完整信息，并且进行验证码校验');
+      message.error("请填写完整信息，并且进行验证码校验");
     }
   });
 };
@@ -152,7 +179,7 @@ const onAuthCode = () => {
 }
 @media (min-width: 768px) {
   .view-account {
-    background-image: url('../../assets/images/login.svg');
+    background-image: url("../../assets/images/login.svg");
     background-repeat: no-repeat;
     background-position: 50%;
     background-size: 100%;

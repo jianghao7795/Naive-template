@@ -9,13 +9,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, provide, getCurrentInstance } from 'vue';
-import { NMessageProvider, NNotificationProvider, NConfigProvider, NSwitch } from 'naive-ui';
-import { useRoute } from 'vue-router';
-import { darkTheme, zhCN, dateZhCN } from 'naive-ui';
-import { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface';
-import { MessageApiInjection } from 'naive-ui/es/message/src/MessageProvider';
-import { NotificationApiInjection } from 'naive-ui/es/notification/src/NotificationProvider';
+import { defineComponent, ref, provide, getCurrentInstance } from "vue";
+import {
+  NMessageProvider,
+  NNotificationProvider,
+  NConfigProvider,
+  NSwitch,
+} from "naive-ui";
+import { useRoute } from "vue-router";
+import { darkTheme, zhCN, dateZhCN } from "naive-ui";
+import { BuiltInGlobalTheme } from "naive-ui/es/themes/interface";
+import { MessageApiInjection } from "naive-ui/es/message/src/MessageProvider";
+import { NotificationApiInjection } from "naive-ui/es/notification/src/NotificationProvider";
 
 declare global {
   interface Window {
@@ -24,7 +29,7 @@ declare global {
   }
 }
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
     NMessageProvider,
     NNotificationProvider,
@@ -33,10 +38,10 @@ export default defineComponent({
   },
   setup() {
     const theme = ref<BuiltInGlobalTheme | null>(null);
-    const { proxy } = getCurrentInstance(); //对应config.globalProperties
-    console.log(proxy);
+    const sb = getCurrentInstance(); //对应config.globalProperties
+    console.log(sb);
     const route = useRoute();
-    provide('theme', theme);
+    provide("theme", theme);
     // console.log(route);
     const changeTheme = (e: boolean) => {
       // console.log(e);
@@ -46,7 +51,7 @@ export default defineComponent({
         theme.value = null;
       }
     };
-    provide('changeTheme', changeTheme);
+    provide("changeTheme", changeTheme);
     return {
       // darkTheme,
       zhCN,
@@ -60,5 +65,5 @@ export default defineComponent({
 </script>
 
 <style>
-@import './styles/global.less';
+@import "./styles/global.less";
 </style>

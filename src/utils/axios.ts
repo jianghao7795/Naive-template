@@ -53,7 +53,7 @@ const showStatus = (status: number, errorMessage: string) => {
 const service = axios.create({
   // 联调
   url: '/',
-  baseURL: 'http://192.168.71.131:4100',
+  baseURL: 'http://127.0.0.1:4100',
   headers: {
     'Content-Type': 'application/json;charset=utf-8',
     // 'Access-Control-Allow-Origin': '*',

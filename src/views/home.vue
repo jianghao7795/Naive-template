@@ -3,8 +3,8 @@
     {{ aa }}
     <n-button type="primary" @click="changeCount">count ++</n-button>
     <br />
-    <p>显示: {{ user }}</p>
-    <p>show: {{ slide }}</p>
+    <p>显示: {{ aa }}</p>
+    <p>show: {{ msg }}</p>
     <span v-once v-bind:id="dynamicId">Message: {{ message }}</span>
     <!-- v-once是渲染一次 v-bind-->
     <n-button @click="changeMsg">change msg</n-button>
@@ -17,10 +17,10 @@
 </template>
 
 <script lang="ts">
-import { NButton } from 'naive-ui';
-import { ref, defineComponent, onMounted } from 'vue';
-import HomeComponent from '@/views/homeDemo/HomeComponent.vue';
-import Transition from '@/views/transition.vue';
+import { NButton } from "naive-ui";
+import { ref, defineComponent, onMounted } from "vue";
+import HomeComponent from "@/views/homeDemo/HomeComponent.vue";
+import Transition from "@/views/transition.vue";
 // import axios from '@/utils/axios';
 // import { AxiosResponse } from 'axios';
 
@@ -38,18 +38,18 @@ type MenusType = {
 };
 
 export default defineComponent({
-  name: 'Home',
+  name: "Home",
   components: {
     NButton,
     HomeComponent,
     demo: Transition,
   },
-  inject: ['user', 'slide'], // 父级的provide 子级的 inject 接收
+  inject: ["user", "slide"], // 父级的provide 子级的 inject 接收
   setup() {
     const aa = ref<number>(0);
-    const message = ref<string>('');
-    const dynamicId = ref<string>('dynamicId');
-    const msg = ref<string>('');
+    const message = ref<string>("");
+    const dynamicId = ref<string>("dynamicId");
+    const msg = ref<string>("");
     // const menusList = ref<Menu[]>([]);
     // const notification = useNotification();
     onMounted(() => {
@@ -75,7 +75,7 @@ export default defineComponent({
     };
 
     const changeMsg = () => {
-      message.value = 'wowowowo';
+      message.value = "wowowowo";
     };
 
     return {
