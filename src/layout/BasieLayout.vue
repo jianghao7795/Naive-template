@@ -6,7 +6,11 @@
         <n-layout>
           <n-layout-header>
             颐和园路
-            <n-switch :on-update:value="changeTheme" :default-value="!!theme" class="dark-theme-switch">
+            <n-switch
+              :on-update:value="changeTheme"
+              :default-value="!!theme"
+              class="dark-theme-switch"
+            >
               <template #checked>
                 <n-icon size="14" color="#ffd93b">
                   <Moon />
@@ -39,28 +43,39 @@
 </template>
 
 <script lang="ts" setup>
-import { inject, onMounted } from 'vue';
-import { NLayout, NLayoutFooter, NLayoutHeader, NLayoutContent, NLayoutSider, NSpace, useMessage, useNotification, NIcon, NSwitch } from 'naive-ui';
-import { Moon, SunnySharp } from '@vicons/ionicons5';
-import { BuiltInGlobalTheme } from 'naive-ui/es/themes/interface';
-import menus from '@/api/menus';
+import { inject, onMounted } from "vue";
+import {
+  NLayout,
+  NLayoutFooter,
+  NLayoutHeader,
+  NLayoutContent,
+  NLayoutSider,
+  NSpace,
+  useMessage,
+  useNotification,
+  NIcon,
+  NSwitch,
+} from "naive-ui";
+import { Moon, SunnySharp } from "@vicons/ionicons5";
+import { BuiltInGlobalTheme } from "naive-ui/es/themes/interface";
+// import menus from "@/api/menus";
 
 // console.log(theme);
 onMounted(() => {
-  menus.getList().then((response) => {
-    console.log(response);
-    if (response.code === 200) {
-      const { code, data, msg } = response;
-      console.log(code, data, msg);
-    }
-  });
+  // menus.getList().then((response) => {
+  //   console.log(response);
+  //   if (response.code === 200) {
+  //     const { code, data, msg } = response;
+  //     console.log(code, data, msg);
+  //   }
+  // });
 });
-const theme = inject<BuiltInGlobalTheme | null>('theme');
-const changeTheme = inject<(e: boolean) => void>('changeTheme');
+const theme = inject<BuiltInGlobalTheme | null>("theme");
+const changeTheme = inject<(e: boolean) => void>("changeTheme");
 window.$message = useMessage();
 window.$notification = useNotification();
 </script>
 
 <style scoped lang="less">
-@import './src/styles/layout.less';
+@import "./src/styles/layout.less";
 </style>

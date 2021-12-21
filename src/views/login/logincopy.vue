@@ -15,17 +15,40 @@
         }"
       >
         <n-form-item>
-          <n-input v-model:value="formData.username" type="text" placeholder="Please Inputs" />
+          <n-input
+            v-model:value="formData.username"
+            type="text"
+            placeholder="Please Inputs"
+          />
         </n-form-item>
         <n-form-item>
-          <n-input type="password" v-model:value="formData.password" placeholder="密码" :maxlength="8" />
+          <n-input
+            type="password"
+            v-model:value="formData.password"
+            placeholder="密码1111"
+            :maxlength="18"
+          />
         </n-form-item>
         <n-form-item>
-          <span><img @click="getImage" style="width: 150px; height: 50px" :src="image" alt="tus" /></span>
-          <n-input type="text" v-model:value="formData.captcha" placeholder="验证码" :maxlength="8" />
+          <span>
+            <img
+              @click="getImage"
+              style="width: 150px; height: 50px"
+              :src="image"
+              alt="tus"
+            />
+          </span>
+          <n-input
+            type="text"
+            v-model:value="formData.captcha"
+            placeholder="验证码111"
+            :maxlength="18"
+          />
         </n-form-item>
         <n-form-item>
-          <n-button @click="handleSubmit" class="other" size="large" type="primary">登录</n-button>
+          <n-button @click="handleSubmit" class="other" size="large" type="primary"
+            >登录</n-button
+          >
         </n-form-item>
       </n-form>
       <!-- <n-form :model="formData" :rules="rules" ref="formRef">
@@ -39,18 +62,23 @@
           <n-button @click="handleValidateClick" attr-type="button">验证</n-button>
         </n-form-item>
       </n-form>
-      <n-button @click="notify('info')">信息</n-button> -->
+      <n-button @click="notify('info')">信息</n-button>-->
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { PersonOutline, LockClosedOutline, LogoGithub, LogoFacebook } from '@vicons/ionicons5';
-import { NInput, NButton, NForm, NFormItem, useNotification } from 'naive-ui';
-import axios from '@/utils/axios';
-import type { AxiosResponse } from 'axios';
+import { defineComponent, reactive, onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
+import {
+  PersonOutline,
+  LockClosedOutline,
+  LogoGithub,
+  LogoFacebook,
+} from "@vicons/ionicons5";
+import { NInput, NButton, NForm, NFormItem, useNotification } from "naive-ui";
+import axios from "@/utils/axios";
+import type { AxiosResponse } from "axios";
 
 type ImageType = {
   code: number;
@@ -70,7 +98,7 @@ type LoginType = {
 };
 
 export default defineComponent({
-  name: 'Login',
+  name: "Login",
   components: {
     PersonOutline,
     LockClosedOutline,
@@ -85,25 +113,27 @@ export default defineComponent({
     const notification = useNotification();
     const router = useRouter();
     const formData = ref({
-      username: '',
-      password: '',
-      captcha: '',
+      username: "",
+      password: "",
+      captcha: "",
     });
     const image = ref<string>();
     const getImage = () => {
-      axios.get<{}, AxiosResponse<ImageType>>(`/user/captcha`).then((resp: AxiosResponse<ImageType>) => {
-        const { code, data, msg } = resp.data;
-        if (code === 200) {
-          image.value = data.picPath;
-          return;
-        }
+      axios
+        .get<{}, AxiosResponse<ImageType>>(`/user/captcha`)
+        .then((resp: AxiosResponse<ImageType>) => {
+          const { code, data, msg } = resp.data;
+          if (code === 200) {
+            image.value = data.picPath;
+            return;
+          }
 
-        notification.error({
-          title: '请求失败' + code,
-          content: '',
-          meta: msg,
+          notification.error({
+            title: "请求失败" + code,
+            content: "",
+            meta: msg,
+          });
         });
-      });
     };
     onMounted(() => {
       getImage();
@@ -113,7 +143,7 @@ export default defineComponent({
       formRef,
       formData,
       image,
-      logo: '@/assets/head.png',
+      logo: "@/assets/head.png",
       getImage,
       handleSubmit: () => {
         // console.log(formRef.value);
@@ -121,26 +151,31 @@ export default defineComponent({
           console.log(err);
         });
         // router.replace('/dashboard/control');
-        axios.post<typeof formData, AxiosResponse<LoginType>>('/user/login', { ...formData }).then((resp) => {
-          // console.log(resp);
-          const {
-            code,
-            data: { token },
-            msg,
-          } = resp.data;
-          if (code === 200) {
-            localStorage.setItem('token', token);
-            router.push({
-              path: '/backend/home',
-            });
-            return;
-          }
+        console.log(formData.value);
+        axios
+          .post<typeof formData, AxiosResponse<LoginType>>("/user/login", {
+            ...formData,
+          })
+          .then((resp) => {
+            console.log(resp);
+            const {
+              code,
+              data: { token },
+              msg,
+            } = resp.data;
+            if (code === 200) {
+              localStorage.setItem("token", token);
+              router.push({
+                path: "/backend/home",
+              });
+              return;
+            }
 
-          notification.error({
-            content: '登录失败',
-            meta: msg,
+            notification.error({
+              content: "登录失败",
+              meta: msg,
+            });
           });
-        });
       },
       // notify: (type: string) => {
       //   console.log(type);
@@ -152,13 +187,13 @@ export default defineComponent({
       rules: {
         username: {
           required: true,
-          message: '请输入用户名',
-          trigger: ['input'],
+          message: "请输入用户名",
+          trigger: ["input"],
         },
         password: {
           required: true,
-          message: '请输入密码',
-          trigger: ['input'],
+          message: "请输入密码",
+          trigger: ["input"],
         },
       },
       // handleValidateClick() {
@@ -179,5 +214,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-@import 'src/styles/login.less';
+@import "src/styles/login.less";
 </style>
+
+@import "src/styles/login.less";

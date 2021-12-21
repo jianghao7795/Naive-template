@@ -29,7 +29,7 @@
             <n-input
               v-model:value="formInline.password"
               type="password"
-              placeholder="请输入密码"
+              placeholder="请输入密码11111"
             >
               <template #prefix>
                 <n-icon size="18" color="#808695">
@@ -125,6 +125,7 @@ const handleSubmit = (e: MouseEvent) => {
         username,
         password,
       };
+      router.push("/backend");
       // const { code, message: msg } = await userStore.login(params);
       // if (code == ResultEnum.SUCCESS) {
       //   const toPath = decodeURIComponent((route.query?.redirect || '/') as string);

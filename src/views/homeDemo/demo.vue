@@ -14,7 +14,9 @@
       <n-input placeholder="姓名" v-model:value="username"></n-input>
     </div>
   </div>
-  <div><n-input v-model:value="debounceCurrValue" /></div>
+  <div>
+    <n-input v-model:value="debounceCurrValue" />
+  </div>
   <p>{{ debounceValue }}</p>
   <p>{{ data }}</p>
   <img :src="data?.data?.picPath" />
