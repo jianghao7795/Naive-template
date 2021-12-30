@@ -2,7 +2,7 @@
   <div class="container">
     <div class="form-warp">
       <n-form
-        class="sign-in-form"
+        class="sign-in-form errorCss"
         :model="formInline"
         :rules="rules"
         label-placement="right"
@@ -12,9 +12,10 @@
         :style="{
           maxWidth: '640px',
         }"
+        :show-label="false"
       >
         <h2 class="form-title">登录</h2>
-        <n-form-item path="username">
+        <n-form-item path="username" class="errorCss">
           <n-input
             placeholder
             size="small"
@@ -33,7 +34,7 @@
             "
           />
         </n-form-item>
-        <n-form-item path="password">
+        <n-form-item path="password" global>
           <n-input
             id="password"
             placeholder
@@ -54,7 +55,17 @@
           />
         </n-form-item>
 
-        <div class="submit-btn" @click="handleSubmit">立即登录</div>
+        <!-- <div class="submit-btn" @click="handleSubmit">立即登录</div> -->
+        <n-form-item>
+          <n-button
+            class="submit-btn"
+            strong
+            secondary
+            round
+            attr-type="button"
+            @click="handleSubmit"
+          >立即登录</n-button>
+        </n-form-item>
       </n-form>
       <!-- <form class="sign-up-form">
         <h2 class="form-title">注册</h2>
@@ -165,5 +176,12 @@ export default defineComponent({
 
 #username::placeholder {
   color: #cccc;
+}
+.errorCss {
+  .n-form-item-feedback-wrapper {
+    .n-form-item-feedback {
+      margin-left: 42px;
+    }
+  }
 }
 </style>
