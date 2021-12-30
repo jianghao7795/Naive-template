@@ -38,7 +38,7 @@ const routers: RouteRecordRaw[] = [
       {
         path: 'login',
         name: 'login',
-        component: () => import('@/views/login/logincopy.vue'),
+        component: () => import('@/views/login/login.vue'),
         meta: {
           index: 2,
         },

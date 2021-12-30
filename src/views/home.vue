@@ -10,15 +10,16 @@
     <n-button @click="changeMsg">change msg</n-button>
     <br />
     <p>{{ message }}</p>
+    <p>---------------------------------------</p>
+    <some />
     <HomeComponent :is="msg"></HomeComponent>
-
     <demo :app="msg"></demo>
   </div>
 </template>
 
 <script lang="ts">
 import { NButton } from "naive-ui";
-import { ref, defineComponent, onMounted } from "vue";
+import { ref, defineComponent, onMounted, h } from "vue";
 import HomeComponent from "@/views/homeDemo/HomeComponent.vue";
 import Transition from "@/views/transition.vue";
 // import axios from '@/utils/axios';
@@ -52,23 +53,11 @@ export default defineComponent({
     const msg = ref<string>("");
     // const menusList = ref<Menu[]>([]);
     // const notification = useNotification();
-    onMounted(() => {
-      // axios.get<{}, AxiosResponse<MenusType>>('/api/v1/menus-all').then((response) => {
-      //   // console.log(response);
-      //   const { data, code, msg } = response.data;
-      //   // console.log(data);
-      //   if (code === 200) {
-      //     menusList.value = data;
-      //     return;
-      //   }
-      //
-      //   notification.error({
-      //     title: `请求菜单错误：${code}`,
-      //     description: msg,
-      //     duration: 10000,
-      //   });
-      // });
-    });
+    const createH = () => {
+      return h("h1", {}, "Some title");
+    };
+    const some = createH();
+    onMounted(() => {});
     const changeCount = (b: any) => {
       console.log(b);
       aa.value++;
@@ -85,6 +74,7 @@ export default defineComponent({
       dynamicId,
       changeCount,
       changeMsg,
+      some,
     };
   },
 });

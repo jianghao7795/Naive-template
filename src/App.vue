@@ -39,7 +39,7 @@ export default defineComponent({
   setup() {
     const theme = ref<BuiltInGlobalTheme | null>(null);
     const sb = getCurrentInstance(); //对应config.globalProperties
-    console.log(sb);
+    // console.log(sb);
     const route = useRoute();
     provide("theme", theme);
     // console.log(route);
