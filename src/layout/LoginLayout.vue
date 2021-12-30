@@ -14,19 +14,19 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
-import { useMessage, useNotification } from 'naive-ui';
+import { ref, defineComponent } from "vue";
+import { useMessage, useNotification, NButton } from "naive-ui";
 
 export default defineComponent({
-  name: 'LoginLayout',
+  name: "LoginLayout",
   provide() {
     return {
-      user: 'John Doc',
+      user: "John Doc",
       slide: this.slide,
     };
   },
   setup() {
-    const slide = ref<string>('slide-left');
+    const slide = ref<string>("slide-left");
     window.$message = useMessage();
     window.$notification = useNotification();
     return {

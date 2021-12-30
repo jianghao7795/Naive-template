@@ -42,8 +42,8 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { inject, onMounted } from "vue";
+<script lang="ts">
+import { defineComponent, inject, onMounted } from "vue";
 import {
   NLayout,
   NLayoutFooter,
@@ -58,22 +58,41 @@ import {
 } from "naive-ui";
 import { Moon, SunnySharp } from "@vicons/ionicons5";
 import { BuiltInGlobalTheme } from "naive-ui/es/themes/interface";
-// import menus from "@/api/menus";
 
-// console.log(theme);
-onMounted(() => {
-  // menus.getList().then((response) => {
-  //   console.log(response);
-  //   if (response.code === 200) {
-  //     const { code, data, msg } = response;
-  //     console.log(code, data, msg);
-  //   }
-  // });
+export default defineComponent({
+  setup() {
+    // import menus from "@/api/menus";
+
+    // console.log(theme);
+    onMounted(() => {
+      // menus.getList().then((response) => {
+      //   console.log(response);
+      //   if (response.code === 200) {
+      //     const { code, data, msg } = response;
+      //     console.log(code, data, msg);
+      //   }
+      // });
+    });
+    const theme = inject<BuiltInGlobalTheme | null>("theme");
+    const changeTheme = inject<(e: boolean) => void>("changeTheme");
+    window.$message = useMessage();
+    window.$notification = useNotification();
+    return {
+      NLayout,
+      NLayoutFooter,
+      NLayoutHeader,
+      NLayoutContent,
+      NLayoutSider,
+      NSpace,
+      NIcon,
+      NSwitch,
+      Moon,
+      SunnySharp,
+      theme,
+      changeTheme,
+    };
+  },
 });
-const theme = inject<BuiltInGlobalTheme | null>("theme");
-const changeTheme = inject<(e: boolean) => void>("changeTheme");
-window.$message = useMessage();
-window.$notification = useNotification();
 </script>
 
 <style scoped lang="less">

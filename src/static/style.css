@@ -34,7 +34,6 @@
 }
 
 .form-warp {
-  width: 50%;
   position: absolute;
   z-index: 5;
   left: 75%;
@@ -60,6 +59,7 @@
 }
 .form-title {
   color: #6266f5;
+  text-align: center;
 }
 .form-warp .sign-up-form {
   opacity: 0;

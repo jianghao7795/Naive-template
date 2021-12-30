@@ -4,6 +4,7 @@ import router from './rotuer';
 import store from './store';
 import 'vfonts/FiraCode.css';
 import './styles/index.less';
+import Naive, { NA } from 'naive-ui';
 
 const baseApp = createApp(App);
 // console.log(baseApp.config);
@@ -38,4 +39,4 @@ baseApp.config.errorHandler = (err, vm, info) => {
 // globalProperties
 baseApp.config.globalProperties.foo = 'bar';
 
-baseApp.use(router).use(store).mount('#app');
+baseApp.use(Naive).use(router).use(store).mount('#app');
