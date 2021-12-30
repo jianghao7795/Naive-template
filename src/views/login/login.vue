@@ -64,6 +64,7 @@
             round
             attr-type="button"
             @click="handleSubmit"
+            :loading="loading"
           >立即登录</n-button>
         </n-form-item>
       </n-form>
@@ -93,8 +94,9 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { useMessage } from "naive-ui";
+import userLogin from "@/api/login";
 
 export default defineComponent({
   setup() {
@@ -102,6 +104,7 @@ export default defineComponent({
       username: string;
       password: string;
     }
+
     const formRef = ref();
     const message = useMessage();
     const loading = ref(false);
@@ -111,41 +114,26 @@ export default defineComponent({
       password: "",
     });
     const rules = {
-      username: { required: true, message: "请输入用户名", trigger: ["input", "blur"] },
-      password: { required: true, message: "请输入密码", trigger: ["input", "blur"] },
+      username: { required: true, message: "", trigger: ["input", "blur"] },
+      password: { required: true, message: "", trigger: ["input", "blur"] },
     };
     // const userStore = useUserStore();
     const router = useRouter();
     // const route = useRoute();
     const handleSubmit = (e: MouseEvent) => {
-      const { username, password } = formInline;
-      console.log(username, password);
+      loading.value = true;
       e.preventDefault();
-      formRef.value.value.validate(async (errors: any) => {
+      formRef.value.validate(async (errors: any) => {
         console.log(errors);
         if (!errors) {
-          // const { username, password } = formInline;
-          // message.loading("登录中...");
-          // loading.value = true;
-          // const params: FormState = {
-          //   username,
-          //   password,
-          // };
-          // router.push("/backend");
-          // const { code, message: msg } = await userStore.login(params);
-          // if (code == ResultEnum.SUCCESS) {
-          //   const toPath = decodeURIComponent((route.query?.redirect || "/") as string);
-          //   message.success("登录成功！");
-          //   router.replace(toPath).then((_) => {
-          //     if (route.name == "login") {
-          //       router.replace("/");
-          //     }
-          //   });
-          // } else {
-          //   message.info(msg || "登录失败");
-          // }
-        } else {
-          message.error("请填写完整信息，并且进行验证码校验");
+          userLogin.login(formInline).then(res => {
+            loading.value = false;
+            if (res && res?.data?.code && res?.data?.code === 200) {
+              router.push('/backend');
+            } else {
+              message.error('账号密码错误! 请重试');
+            }
+          });
         }
       });
     };
@@ -159,7 +147,7 @@ export default defineComponent({
       // useMessage,
       formRef,
       // message,
-      // loading,
+      loading,
       // autoLogin,
       formInline,
       rules,
