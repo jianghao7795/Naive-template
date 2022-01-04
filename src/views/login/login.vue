@@ -129,6 +129,7 @@ export default defineComponent({
           userLogin.login(formInline).then(res => {
             loading.value = false;
             if (res && res?.data?.code && res?.data?.code === 200) {
+              localStorage.setItem('token', res.data.data.token);
               router.push('/backend');
             } else {
               message.error('账号密码错误! 请重试');
