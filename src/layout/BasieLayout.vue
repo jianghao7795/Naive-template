@@ -59,6 +59,8 @@ import {
 import { Moon, SunnySharp } from "@vicons/ionicons5";
 import { BuiltInGlobalTheme } from "naive-ui/es/themes/interface";
 import menus from '@/api/menus';
+import user from "@/api/user";
+import { setLocal } from "@/utils/helper";
 
 export default defineComponent({
   setup() {
@@ -73,6 +75,15 @@ export default defineComponent({
           console.log(code, data, msg);
         }
       });
+
+      user.getMe().then(response => {
+        console.log(response);
+        if (response.code === 200) {
+          const { code, data, msg } = response;
+          console.log(code, data, msg);
+          setLocal('user', data);
+        }
+      })
     });
     const theme = inject<BuiltInGlobalTheme | null>("theme");
     const changeTheme = inject<(e: boolean) => void>("changeTheme");
